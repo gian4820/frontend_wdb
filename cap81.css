@@ -1,0 +1,20 @@
+body{
+  padding-bottom: : 30px;
+}
+
+.jumbotron{
+  color: #2c3e50;
+}
+
+.navbar-inverse{
+  background: #2c3e50;
+
+  }
+
+.navbar-inverse .navbar-nav>li>a{
+  color: white;
+}
+
+.navbar-brand{
+  color: white;
+}

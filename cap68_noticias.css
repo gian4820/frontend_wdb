@@ -1,0 +1,44 @@
+body{
+  border: 15px solid #bdc3c7;
+  max-width: 700px;
+  font-family: 'Source Sans Pro', sans-serif;
+  width: 80%;
+  margin: 20px auto;
+/*
+  el margin le da 20px de altura y automatico de los anchos */
+}
+
+
+h2{
+  color: #2c3e50;
+  margin-left: 5%;
+
+}
+
+h4{
+  color: #3498db;
+  text-transform: uppercase;
+  font-size: 15px;
+  margin-left: 5%;
+  letter-spacing: 0.2rem;
+
+  /* 2 rem significa que duplica el valor de lo que tenia. */
+  
+}
+
+
+p{
+  font-size: 13px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+
+.space{
+	border-left: 4px solid #bdc3c7;
+	padding-left: 4px;
+}
+
+hr{
+  width: 90%;
+}

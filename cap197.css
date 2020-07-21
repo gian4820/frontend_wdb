@@ -1,0 +1,77 @@
+body{
+    background-color: rgb(23, 23, 23);
+    margin: 0px;
+    font-family: Avenier;
+}
+
+h1{
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin: auto;    
+    font-size: 25px;
+    background-color: rgb(54, 137, 231);
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.colores{
+    width: 30%;
+    background-color: blueviolet;
+    padding-top: 30%;
+    float: left;
+    margin: 1.66%;
+    border-radius: 15%;
+    transition: background 0.5s;
+}
+
+#container{
+    max-width: 600px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+#display{
+    color: white;
+    display: inline-block;
+    width: 13%;
+}
+
+#opciones{
+    background-color: white;
+    height: 100%;
+    text-align: center;    
+}
+
+.selected{
+    background-color: rgb(54, 137, 231);
+    color: white;
+}
+
+button{
+    border: none;
+    background-color: white;
+    text-transform: uppercase;
+    height: 100%;
+    font-weight: bold;
+    font-size: 15px;
+    color: rgb(54, 137, 231);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    outline: none;
+}
+
+button:hover{
+    background-color:rgb(54, 137, 231);
+    color: white;
+}
+
+
+
+#rgbdisplay{
+    font-size: 45px;
+    font-weight: bold;
+}
+

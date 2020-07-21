@@ -1,0 +1,22 @@
+img{
+  width: 30%;
+  float: left;
+  margin: 1.66%;
+  height: 260px;
+}
+
+h1{
+  color: blue;
+  text-align: center;
+  /* Asi se utiliza para centrar las letras */
+  font-family: Raleway;
+  text-transform: uppercase;
+  border-bottom: 3px solid;
+  border-color: red;
+  width: 30%;
+  margin-left: 1.66%;
+  padding-bottom: 20px;
+  /* Border bottom indica borde debajo unicamente
+  margin left, es para dejar un margen a la izquierda
+  padding, es el espacio o relleno que hay entre el titulo y el borde */
+}

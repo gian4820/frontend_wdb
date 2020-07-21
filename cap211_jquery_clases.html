@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery Methods</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<style type="text/css">
+
+		.correct {
+			color: green;
+		}
+
+		.wrong {
+			color: red;
+			background: pink;
+		}
+
+		.done {
+			color: gray;
+			text-decoration: line-through;
+		}
+
+	</style>
+</head>
+<body>
+
+<h1>jQuery Methods Demo Page</h1>
+
+<input type="text" placeholder="your name">
+
+<select>
+	<option>Ostrich</option>
+	<option>Turtle</option>
+	<option>Toad</option>
+</select>
+
+<ul>
+	<li>val(): aca verificamos el valor que tiene por ejemplo el input, o el select</li>
+	<li>text(): aca el texto que tiene el input, o el h1, etc, se lo puede cambiar
+		<ul>
+			<li>Aca se puede o ver la info que tiene adentro con text()</li>
+			<li>O tambien podes cambiarle el texto con text('dasdasdas')</li>
+		</ul>
+	</li>
+	<li>attr():este es para cambiarle los atributos. Por ejemplo para un input text, lo podemos modificar con un numeric, o color, etc</li>
+	<li>html(): aca para modificarle la estructura html, o verlo como esta construido</li>
+	<li>addClass(): aca para añadirlo a una clase</li>
+	<li>removeClass(): para borrarlo de una clase</li>
+	<li>toggleClass: aca si tiene clase, se la borra. Y si no tiene, se la agrega</li>
+</ul>
+
+<h3>Ejemplo de imagenes</h3>
+
+<ul>
+	<li>se puede redimensionar las imagenes con $(img).css(width, 200 px)</li>
+</ul>
+<img src="http://i.imgur.com/zvANQeG.jpg">
+<img src="http://i.imgur.com/zvANQeG.jpg">
+<img src="http://i.imgur.com/zvANQeG.jpg">
+
+<script src="cap211.js"></script>
+</body>
+</html>

@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script async src="https://www.ole.com.ar/commons/js/prebid2.16.0_r_a.js?v0.1"></script>
+        <script>
+
+            var desktopSizes = [
+                [970, 250],
+                [728, 90],
+                [300, 250],
+                [950, 90],
+                [970, 90],
+                [970, 300],
+                [950, 300]
+            ];
+            var tabletSizes = [
+                [728, 90],
+                [950, 90],
+                [300, 250],
+                [950, 300]
+            ];
+            var phoneSizes = [
+                [320, 100],
+                [320, 50],
+                [300, 600],
+                [300, 250]
+            ];
+            var allSizes = [
+                [970, 250],
+                [970, 90],
+                [970, 300],
+                [728,90],
+                [320, 100],
+                [320, 50],
+                [300, 600],
+                [300, 250],
+                [950, 90],
+                [950, 300]
+            ];
+
+            var caja_sizes = [
+                [300, 250],
+                [300, 600]  
+            ];
+            var horizontal_sizes = [
+                [728, 90],
+                [970, 250],
+                [950,90],
+                [950,300],
+                [320, 100],
+                [320, 50]
+            ];
+            var PREBID_TIMEOUT = 2000;
+            var FAILSAFE_TIMEOUT = 3000;
+
+            var adUnits = [
+                {
+                    code: '/242767168/ole/home/horizontal1',
+                    mediaTypes: {
+                        banner: {
+                            sizes: horizontal_sizes
+                        }
+                    },
+                    bids: [{
+                        bidder: 'appnexus',
+                        params: {
+                            placementId: 16068174,
+                            keywords:{
+                                path:['home']
+                            }
+                        }},
+                      {
+                        bidder: 'rubicon',
+                        params: {
+                            accountId: '11206',
+                            siteId: '32276',
+                            zoneId: '176474',
+                    }}]
+                },{
+                    code: '/242767168/ole/home/caja1',
+                    mediaTypes: {
+                        banner: {
+                            sizes: caja_sizes
+                        }
+                    },
+                    bids: [{
+                        bidder: 'appnexus',
+                        params: {
+                            placementId: 16068175,
+                            keywords:{
+                                path:['home']
+                            }
+                        }},
+                      {
+                        bidder: 'rubicon',
+                        params: {
+                            accountId: '11206',
+                            siteId: '32276',
+                            zoneId: '303830',
+                    }}]
+                 },{
+                    code: '/242767168/ole/home/caja2',
+                    mediaTypes: {
+                        banner: {
+                            sizes: caja_sizes
+                        }
+                    },
+                    bids: [{
+                        bidder: 'appnexus',
+                        params: {
+                            placementId: 16068176,
+                            keywords:{
+                                path:['home']
+                            }
+                        }},
+                      {
+                        bidder: 'rubicon',
+                        params: {
+                            accountId: '11206',
+                            siteId: '32276',
+                            zoneId: '176464',
+                    }}]
+                }
+            ];
+
+
+
+            // ======== DO NOT EDIT BELOW THIS LINE =========== //
+            var googletag = googletag || {};
+            googletag.cmd = googletag.cmd || [];
+            googletag.cmd.push(function() {
+                googletag.pubads().disableInitialLoad();
+            });
+
+            var pbjs = pbjs || {};
+            pbjs.que = pbjs.que || [];
+
+            pbjs.que.push(function() {
+                pbjs.addAdUnits(adUnits);
+                pbjs.setConfig({priceGranularity: "dense"});
+                pbjs.setConfig({
+                    sizeConfig: [{
+                        'mediaQuery': '(min-width: 1025px)',
+                        'sizesSupported': desktopSizes,
+                        'labels': ['desktop']
+                    }, {
+                        'mediaQuery': '(min-width: 768px) and (max-width: 1024px)',
+                        'sizesSupported': tabletSizes,
+                        'labels': ['tablet']
+                    }, {
+                        'mediaQuery': '(min-width: 320px) and (max-width: 812px)',
+                        'sizesSupported': phoneSizes,
+                        'labels': ['phone']
+                    }]
+                });
+            if ("home" == "home") {
+                pbjs.bidderSettings = {
+                    rubicon: {
+                        bidCpmAdjustment: function (bidCpm, bid) {
+                            console.log(bid);
+                            console.log('bidCpm is : ' + bidCpm);
+                            console.log('New bidCpm is : ' + bidCpm * 0.88);
+                            return bidCpm * 0.88;
+                        }
+                    }
+                };
+            }
+            pbjs.requestBids({
+                    bidsBackHandler: initAdserver,
+                    timeout: PREBID_TIMEOUT
+                });
+            });
+
+            function initAdserver() {
+                function initAdServerInterval() {
+                    if (googletag.pubadsReady) {
+                        if (pbjs.initAdserverSet) return;
+                        pbjs.initAdserverSet = true;
+                        googletag.cmd.push(function() {
+                            pbjs.que.push(function() {
+                                pbjs.setTargetingForGPTAsync();
+                                googletag.pubads().refresh();
+                                googletag.cmd.push(function () {
+                                    console.log("###### Window.log: ",window.log);
+                                    var privateDefineSlot = googletag.defineSlot.bind(googletag);
+                                    googletag.defineSlot = function () {
+                                        var result = privateDefineSlot.apply(void 0, arguments);
+                                        setTimeout(function() {
+                                            googletag.pubads().refresh([result]);
+                                        }, 10);
+                                        return result;
+                                    };
+                                });
+                            });
+                        });
+                        clearInterval(intervalId); 
+                    };
+                };
+                intervalId=setInterval(initAdServerInterval,100);
+            };
+        </script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="Content-Language" content="es" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="DISTRIBUTION" content="Global" />
+        <meta name="ROBOTS" content="all" />
+        <meta name="AUTHOR" content="Diario Deportivo Olé" />
+        <meta name="classification" content="deporte, futbol, tenis, ascenso, polideportivo" />
+        <meta name="Googlebot" content="all" />
+        <meta name="GENERATOR" content="Diario deportivo Ole" />
+        <meta name="SUBJECT" content="Diario deportivo Ole" />
+        <meta name="DESCRIPTION" content="Olé, diario deportivo líder en Argentina. Noticias deportivas de: Fútbol local e internacional, Selección Nacional, tenis, rugby, autos y más. Entrevistas, fotos, audios y videos." />
+        <meta name="ABSTRACT" content="Olé, diario deportivo líder en Argentina. Noticias deportivas de: Fútbol local e internacional, Selección Nacional, tenis, rugby, autos y más. Entrevistas, fotos, audios y videos." />
+        <meta name="KEYWORDS" content="mundial, futbol, primera, ascenso, selección, mundial, tenis, basquet, autos, rugby, polideportivo, copa argentina, uno x uno, barcelona, corinthians, neymar, superliga, del potro, fixture, boca, river, mercado de pases" />
+        <meta name="msApplication-ID" content="App" />
+        <meta name="msApplication-PackageFamilyName" content="AGEA.MOBILE.Ole_q59wyq0q7cm24" />
+        <title>Diario deportivo líder de Argentina | Olé</title>
+        <link href="/static/OLEOleV2/css/comprimido_mod.css?hash=d22dd362166e510f124e7143ecfd7552" rel="stylesheet" type="text/css" />
+        <script>var optaTimezoneEnable = true;</script>
+        <script type="text/javascript" src="https://st-wzb.ole.com.ar/weizenbock/amazon/min.js?v0.3"></script>
+        <script type="text/javascript" src="/static/BBTCore/js/jquery-1.9.1.min.js?hash=5193fb3b683f30998131801e22b2652a"></script>
+        <script type="text/javascript" src="/static/OLEOleV2/js/jquery-migrate-1.2.1.js?hash=8a4910d55eef6404c373ff6196721812"></script>
+        <script type="text/javascript" src="/static/OLEOleV2/js/comprimido.js?hash=e958b93df2b8a6433d699c296f943b6e"></script>
+        <script type="text/javascript" src="/static/OLEOleV2/js/owl/owl.carousel.min.js?hash=6473747d818f47587036ccde48050d82"></script>
+        <script type="text/javascript" src="/static/BBTCore/js/bbt.js?hash=a9fed5cbd6d445c36f85d49e1e1f7a74"></script>
+        <script type="text/javascript" src="/static/BBTSwfObject/js/swfobject.js?hash=8c2ec4bc2c9a39bc3f4ff92223077cf6"></script>
+        <script type="text/javascript" src="/static/DESGenerico/js/des.scrollable.descomprimido.js?hash=7498e42fe84374f2a4ebc1926e6961cd"></script>
+        <script type="text/javascript" src="/static/LABWall/js/jquery2.js?hash=8551eaf7d8b3cb3796b1fe23dcb51898"></script>
+        <script type="text/javascript" src="/static/OLEOleV2/js/jquery-ui-1.7.2.custom.min.js?hash=df5bb799100dac4360cb4eed53b749c7"></script>
+        <script type="text/javascript" src="/static/OLEOle/js/scrollable.jquery.tools.min.js?hash=aaa85a04be441d9a7a6de99e38fa7052"></script>
+        <script type="text/javascript" src="/static/OLEOle/js/des.marquee.js?hash=47b2b8dc32d004a164f9f126428881d2"></script>
+        <script type="text/javascript" src="/static/OLEOle/js/jscroller-0.4.js?hash=d63aaefb45c261780945c792a032fafd"></script>
+        <script type="text/javascript" src="/static/OLEOleV2/js/ads.js?hash=f6e2186486eb52f45ccbcd7b58e273e7"></script>
+        <script type="text/javascript" src="/static/OLEOleV2/js/rumble.js?hash=10e2dcd07beca14c3db698d896779226"></script>
+        <link rel="canonical" href="https://www.ole.com.ar" />
+        <link rel="alternate" title="Diario deportivo líder de Argentina | Olé" href="/rss/ultimas-noticias/" type="application/rss+xml" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="fb:admins" content="70254297877" />
+        <script type="text/javascript">
+
+    try {
+
+    	if ('external' in window && 'msIsSiteMode' in window.external && window.external.msIsSiteMode()){
+
+    		window.external.msSiteModeClearJumplist();
+
+    		window.external.msSiteModeCreateJumplist('Últimas Noticias');
+
+    		window.external.msSiteModeAddJumpListItem("Ventaja peruana","http://www.ole.com.ar/futbol-internacional/libertadores/melgar-caracas-libertadores-fase_0_2183781601.html#utm_source=ie9&utm_medium=web&utm_campaign=pinned-ie9-ultimasnoticias","http://www.ole.com.ar/favicon.ico");
+
+    		window.external.msSiteModeAddJumpListItem("Una racha para cortar y soñar","http://www.ole.com.ar/boca-juniors/racha-boca-atletico-tucuman-bombonera_0_2183181756.html#utm_source=ie9&utm_medium=web&utm_campaign=pinned-ie9-ultimasnoticias","http://www.ole.com.ar/favicon.ico");
+
+    		window.external.msSiteModeAddJumpListItem("\"Balerdi me dijo que tenía la cabeza en otro lado\"","http://www.ole.com.ar/seleccion/boca-leo-balerdi-fernando-batista-sub-20_0_2183181755.html#utm_source=ie9&utm_medium=web&utm_campaign=pinned-ie9-ultimasnoticias","http://www.ole.com.ar/favicon.ico");
+
+    		window.external.msSiteModeAddJumpListItem("El cruce entre el Cardiff y el intermediario de Sala","http://www.ole.com.ar/informacion-general/emiliano-sala-vuelo-cardiff-mckay-representante_0_2183181754.html#utm_source=ie9&utm_medium=web&utm_campaign=pinned-ie9-ultimasnoticias","http://www.ole.com.ar/favicon.ico");
+
+    		window.external.msSiteModeAddJumpListItem("Era un Marlboro, Guille","http://www.ole.com.ar/fuera-de-juego/daniel-osvlado-publico-foto-instagram_0_2183181753.html#utm_source=ie9&utm_medium=web&utm_campaign=pinned-ie9-ultimasnoticias","http://www.ole.com.ar/favicon.ico");
+
+    		window.external.msSiteModeShowJumplist();
+
+    	}
+
+    }catch(err){}
+
+    </script>
+        <meta property="fb:pages" content="70254297877" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:image" content="https://images.ole.com.ar/bbtfile/5050_20170523ldAO2E.png">
+        <meta name="twitter:site" content="@diarioole">
+        <meta name="twitter:title" content="Diario deportivo líder de Argentina | Olé">
+        <meta name="twitter:description" content="Ole.com.ar en Twitter. Las noticias deportivas de la Argentina y el mundo.">
+        <meta name="twitter:creator" content="@diarioole">
+        <meta name="twitter:domain" content="ole.com.ar">
+        <meta property="fb:app_id" content="117246291804305" />
+        <meta property="og:image" content="https://images.ole.com.ar/bbtfile/5050_20170523ldAO2E.png" />
+        <meta property="og:url" content="https://www.ole.com.ar" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Diario deportivo líder de Argentina | Olé" />
+        <meta property="og:description" content="Ole.com.ar. Las noticias deportivas de la Argentina y el mundo." />
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'sendPageview',
+            'comscoreParams': {c1: "2", c2: "6906409"},
+            'cd_paseId': getValueFromCookie('idPase'),
+            'cd_nsSite': "ole",
+            'cd_adblock': adblockFlag() ? "si" : "no",
+            'cd_nsListaTags': "-2",
+            'cd_name': "home.inicio",
+            'cd_bprivate': window.isPrivateMode,
+            'cd_autorefresh': refreshChecker.isAutorefresh(),
+            'cd_anioPublicacion': "2020",
+            'cd_mesPublicacion': "04",
+            'cd_diaPublicacion': "21",
+            'cd_horaPublicacion': "21:22",
+            'cd_diaSemanaPublicacion': "martes",
+            'cd_tituloNota': document.title,
+            'cd_contadorGral': getPaseCounter(),
+            'cd_blockLW': getIsBlocked(),
+            'cd_blockPW': "no",
+            'cd_hardLW': "no",
+            'cd_hardPW': "no",
+            'cd_notaId': "-2",
+            'cd_temperatura': "-2",
+            'cd_pwAudiencia': "-2",
+            'cd_sexo': getValueFromCookie('Pase-genero')=='' ? "-2" : getValueFromCookie('Pase-genero'),
+            'cd_edad': getAge(getValueFromCookie('Pase-fecNac')=='' ? "-2" : getValueFromCookie('Pase-fecNac')),
+            'cd_tipoPagina': "Home",
+            'cd_multimedia': "-2",
+            'cd_tipoSuscriptor': "-2",
+            'cd_tipoLector': getValueFromCookie('idPase')=='' ? 0 : 1,
+            'cd_concursos': "-2",
+            'cd_referrer': getReferrer(),
+            'cd_pwCounter': "-2",
+            'cd_choque': "-2",
+            'cd_paseFlujo': "-2",
+            'cd_planSeleccionado': "-2",
+            'cd_infobipId': "-2",
+            'cd_urlMultimedia': "-2",
+            'cd_durMultimedia': "-2",
+            'cd_userDataImportAudiencias': "-2",
+            'cd_errorCollect': "-2",
+            'cd_notaTipo': "-2",
+            'cd_campania': "-2",
+            'cd_notaShared': "-2",
+            'cd_FP_user': "-2",
+            'cd_FP_hit': "-2"
+        });
+    </script>
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M5MQQG7');</script>
+    </head>
+    <body>
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M5MQQG7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <div id="wb_meter" apikey="rkfOoNO8" pagegroups="home,portada,free">
+            <script type="text/javascript">
+        var sess = "";
+        var value = "; " + document.cookie;
+        var parts = value.split("; idPase=");
+        if (parts.length == 2) {
+            sess = parts.pop().split(";").shift();
+        }
+        document.getElementById("wb_meter").setAttribute("wbsession", sess);
+    </script>
+        </div>
+        <script type="text/javascript">
+	
+	if ( $.cookie("geoip_country_code") == null ){
+		objSections = {sections: JSON.parse('{"10148":true}')};
+		$.cookie("geoip_country_code", JSON.stringify(objSections), { expires: 365, path: '/' });
+	}
+	
+</script>
+        <script type="text/javascript" src="//tags.crwdcntrl.net/c/9602/cc.js?ns=_cc9602" id="LOTCC_9602"></script>
+        <script type="text/javascript" language="javascript">_cc9602.bcp();</script>
+        <!--googleoff: all-->
+        <script type="text/javascript" src="/apistatic/api/loginwall/script.js?apikey=ole"></script>
+        <script type="text/javascript"> 
+$(document).ready(function() {
+
+        $("a#mis-preferencias").click(function(){
+
+            if ($("#panel-registro").length == 0) {
+
+                $.get("/oleolev2/mispreferencias.json", function(_response){
+                    response = BBT.fixJson(_response);
+                    $.colorbox({
+                        html:response.data,
+                        initialWidth:500,
+                        initialHeight:800,
+                        onComplete : function() { 
+                           $(this).colorbox.resize(); 
+                        }
+                    });
+                });
+                
+
+            }else{
+                $("#panel-registro").colorbox();
+            }
+
+        });
+});
+
+
+
+    function getMetricsCookie(name){
+        
+        var dc      = document.cookie;
+        var prefix  = name + "=";
+        var begin   = dc.indexOf("; " + prefix);
+        
+        if(begin == -1){
+            begin = dc.indexOf(prefix);
+            if (begin != 0){
+                return null;
+            } 
+        } 
+        else{
+            begin += 2;
+        }
+        
+        var end = document.cookie.indexOf(";", begin);
+        if(end == -1){
+            end = dc.length;
+        }
+        
+        return unescape(dc.substring(begin + prefix.length, end));
+    }
+
+    function deleteMetricsCookie(name, path, domain){
+        
+        if (getMetricsCookie(name)){
+            
+            document.cookie = name + "=" +
+            ((path) ? "; path=" + path : "") +
+            ((domain) ? "; domain=" + domain : "") +
+            "; expires=Thu, 01-Jan-70 00:00:01 GMT";
+        }
+    }
+
+    var daxRefresh = "&refresh=no";
+    var daxRefreshValue = 'no';
+
+    if(getMetricsCookie("desMetricsRefresh") == 1){
+	   
+       deleteMetricsCookie("desMetricsRefresh");
+	   daxRefresh = "&refresh=si";
+    }	
+
+    function getIdPase() {
+        
+        var idPase = $.cookie('idPase');
+
+        if (idPase != null && idPase != "") {
+            return idPase;
+        } else {
+            return "";
+        }
+    }
+
+    function getIdPaseToStringUrl () {
+
+        var idPase = getIdPase();
+        
+        if (idPase != "" ) {
+            return "&pase_id=" + idPase;
+        } else {
+            return "";
+        }
+    }
+
+    // 
+            <![CDATA[
+    function udm_(u){var d=document,l=d.location;ns_pixelUrl=u+"&ns__t="+(new Date().getTime());u=ns_pixelUrl+"&ns_c="+((d.characterSet)?d.characterSet:d.defaultCharset)+"&ns_ti="+escape(d.title)+"&c8="+escape(d.title)+"&c7="+escape(l&&l.href?l.href:d.URL)+"&ns_jspageurl="+escape(l&&l.href?l.href:d.URL)+"&c9="+escape(d.referrer)+"&ns_referrer="+escape(d.referrer);(d.images)?new Image().src=u:d.write('<'+'p><img src="'+u+'" height="1" width="1" alt=""/><'+'/p>');};
+    // udm_('https://sb.scorecardresearch.com/b?c1=2&c2=6906409&ns_site=ole&name=home.inicio' + daxRefresh + getIdPaseToStringUrl());
+    // ]]>
+
+    function uid_call(a, b){
+        ui_c2 = "6906409";
+        ui_ns_site = "ole";
+        window.b_ui_event = window.c_ui_event != null ? window.c_ui_event:"",window.c_ui_event = a;
+        var ui_pixel_url = 'https://sb.scorecardresearch.com/p?c1=2&c2='+ui_c2+'&ns_site='+ui_ns_site+'&name='+a+'&ns_type=hidden&type=hidden&ns_ui_type='+b;
+        var b="comScore=",c=document,d=c.cookie,e="",f="indexOf",g="substring",h="length",i=2048,j,k="&ns_",l="&",m,n,o,p,q=window,r=q.encodeURIComponent||escape;if(d[f](b)+1)for(o=0,n=d.split(";"),p=n[h];o<p;o++)m=n[o][f](b),m+1&&(e=l+unescape(n[o][g](m+b[h])));ui_pixel_url+=k+"_t="+ +(new Date)+k+"c="+(c.characterSet||c.defaultCharset||"")+"&c8="+r(c.title)+e+"&c7="+r(c.URL)+"&c9="+r(c.referrer)+"&b_ui_event="+b_ui_event+"&c_ui_event="+c_ui_event,ui_pixel_url[h]>i&&ui_pixel_url[f](l)>0&&(j=ui_pixel_url[g](0,i-8).lastIndexOf(l),ui_pixel_url=(ui_pixel_url[g](0,j)+k+"cut="+r(ui_pixel_url[g](j+1)))[g](0,i)),c.images?(m=new Image,q.ns_p||(ns_p=m),m.src=ui_pixel_url):c.write("
+            <p>
+                <img src='",ui_pixel_url,"' height='1' width='1' alt='*'>
+            </p>");
+    }
+
+
+// TODO: Calculo timestamp local con diferencia GMT
+var timestamp = new Date().getTime();
+var dt = new Date()
+var tz = -dt.getTimezoneOffset()/60;
+var gmtZone = 'GTM'+ tz;
+
+var daxParams = getIdPaseToStringUrl() + daxRefresh + "" + "&timestamp="+timestamp+"|"+gmtZone;
+
+
+var timeout = 0;
+
+var desMetrics = {
+    'baseUrl': 'https://sb.scorecardresearch.com/b',
+    'idPase': getIdPase(),
+    'sourceModal': 'home',
+    'defaults': {
+        'c1': 2,
+        'c2': '6906409',
+        'ns_site': 'ole',
+        'refresh': daxRefreshValue,
+        'name': 'home.inicio',
+        'year': "",
+        'month': "",
+        'day': "",
+        'hour': "",
+        'weekDay': "",
+        'timestamp': timestamp+"|"+gmtZone
+    },
+    'loadPaseIdInDefaults': function() {
+        if (this.idPase !== '') {
+            this.defaults.pase_id = this.idPase;
+        }
+    },
+    'sendRequestToXML': function() {
+        $.ajax({
+            type: 'GET',
+            url: '/pv.xml',
+            dataType: 'xml'
+        });
+    },
+    /*'sendPageViewCandidate': function(params) {
+        window.clearTimeout(timeout);
+        var originalFormatParams = params;
+        var oneSecond = 1000;
+        var scope = this;
+        
+        timeout = setTimeout(function() {
+            scope.loadPaseIdInDefaults();
+            params = $.extend(scope.defaults, params);
+            var url = scope.baseUrl + '?' + $.param(params) + desMetrics.getParameterLWtoDax();
+            scope.sendRequestToXML();
+            udm_(url);
+            //send DIRECT
+            if(typeof(COMSCORE)=='undefined') {
+                document.write(unescape("%3Cscript src='" + (document.location.protocol == "https:" ? 
+                "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js' %3E%3C/script%3E")); 
+            }
+            COMSCORE.beacon({ 
+                c1:"2", 
+                c2: "6906409" 
+            }); 
+            ///
+            //analytics 360
+            var dimensionsGA = {
+                dimension25: originalFormatParams.tipo
+            }
+            sendGAPageview(dimensionsGA);
+        }, oneSecond);
+    },*/
+    'getParameterLWtoDax' : function(){
+
+        var params = '';
+        var lwm_count_sum = 0;
+        var lwm_blocked = "no";
+
+        if($.cookie('lw-tracking-olev2')){
+
+            var oData = JSON.parse($.cookie('lw-tracking-olev2'));
+            lwm_count_sum = oData.urls.length;
+            lwm_blocked = (oData.isBlocked) ? "si" : "no";
+        }
+
+        params += "&lwm_count=no";
+        params += "&lwm_count_sum=" + lwm_count_sum;
+        params += "&lwm_block=no";
+        params += "&lwm_blocked=" +lwm_blocked;
+
+        return params;
+
+    }
+};
+        </script>
+        <!--googleon: all-->
+        <script type="text/javascript" lang="javascript">
+    
+    var expire5min = (new Date()).getTime() + 120000; // expiration time - 5 min from now
+
+</script>
+        <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/JS/socialize.js?apikey=3_xs5IT1Ls_fMBPxkesDR7CpMwy4Ffcd15OWGmYjXxXKEHYvaRt3CLfDkXxPFJB9pI&lang=es">
+    {
+        siteName: 'ole.com.ar',
+        enabledProviders: 'facebook,twitter,yahoo,messenger,linkedin,myspace,google',
+        sessionExpiration: 473040000,
+        connectWithoutLoginBehavior: 'alwaysLogin',
+        autoShareExpiration: expire5min
+    }
+
+</script>
+        <script type="text/javascript">
+
+    if(typeof paseE2E != 'undefined'){
+        
+        paseE2E.init({
+            
+            placeIngresar : ".user-login.notLoggedPase .text",
+            placeName :     ".user-login.logged .text",
+            buttonLogout :  ".paseLogOut",
+            placeMiCuenta:  ".paseMiCuenta",
+            urlIframe :     "https://app-pase.ole.com.ar/pase-registracion/app/pase/ingresar",
+            urlIframeLW:    "https://app-pase.ole.com.ar/pase-registracion/app/pase/ingresar?viewId=loginWallOleSitio",
+            urlLogin :      "https://servicios.pase.agea.com.ar/pase-servicios/mobile/OLE/onLoginJSONP",
+            urlProfile:     "https://ole.frontend.pase.agea.com.ar/pase-frontend/app/perfil/administrar",
+            entorno :       ".ole.com.ar", 
+            
+            onLoggedIn: function(response){
+                
+                $('.user-login').hide();
+                $('.user-login.logged').show();
+                
+                if (typeof response != "undefined"){
+                
+                    if (response.user.thumbnailURL != ""){
+                        $('.avatar').removeClass("userUnLogG");
+                        response.user.thumbnailURL = response.user.thumbnailURL.replace("https:","").replace("http:","")
+                        $('.avatar').attr("src",response.user.thumbnailURL);
+                    } 
+                    else{
+                        $('.avatar').addClass("userLogG");
+                        $('.avatar').removeClass("userUnLogG");
+                    }
+                }
+            },
+            
+            onNotLogged: function(){
+                
+                $('.user-login').show();
+                $('.user-login.logged').hide();
+                $('.avatar').removeClass("userLogG");
+                $('.avatar').attr("src", " ");
+                $('.avatar').addClass("userUnLogG");
+            }
+        });
+    }
+
+</script>
+        <div id="lw" data-lwsection="[1]" data-lwcontenttype="board" data-lwkey="ole"></div>
+        <script type="text/javascript">
+
+try {
+
+    jQueryLW("#lw").loginwall({
+        debug: false,
+        preCallback: function(oData){
+        },
+        callback: function(oData){
+
+
+            var params = daxParams;
+
+            params += (oData.thisCount) ? "&lwm_count=si" : "&lwm_count=no";
+    
+            params += "&lwm_count_sum=" + oData.urls.length;
+
+            params += (oData.thisBlock) ? "&lwm_block=si" : "&lwm_block=no";
+    
+            params += (oData.isBlocked) ? "&lwm_blocked=si" : "&lwm_blocked=no";
+
+            if (oData.thisBlock && oData.isBlocked) {
+                if(!$.cookie('lw_blockedAt')){
+                    
+                    var dateExp = new Date(oData.expirationDate);
+                    var hours = 3;
+                    //quita 3 horas a la fecha de expiracion de lw-traking
+                    dateExp.setTime(dateExp.getTime() - (hours * 60 * 60 * 1000));
+
+                    $.cookie("lw_blockedAt",oData.urls.length,{ expires: dateExp, path : "/", domain : ".ole.com"});
+
+                    params += "&lw_blockedAt="+ oData.urls.length;
+                }
+                
+                // $(document).ready(function() { 
+                //     if(!paseE2E.isLoggedIn()) {            
+                //         paseE2E.openModalLW();
+                //     }
+                // });
+                console.log("N1 old call");
+            }
+            //udm_('https://sb.scorecardresearch.com/b?c1=2&c2=6906409&ns_site=ole&name=home.inicio' + params);
+        }
+    });
+} catch (e) {
+    //udm_('https://sb.scorecardresearch.com/b?c1=2&c2=6906409&ns_site=ole&name=home.inicio' + daxParams);
+}
+</script>
+        <script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>
+        <script type="text/javascript">
+
+    var uiconf = "23448985";
+    var wid = "_123";
+    var cargo = false;
+
+    var settings = {
+        uiconf:uiconf,
+        wid:wid,
+        src:"https://vodgc.com/p/123/sp/12300/embedIframeJs/uiconf_id/23448985/partner_id/123"
+    };
+</script>
+        <script type="text/javascript">
+    function getGenDate(value) {
+        var nombre = $.cookie('idPase');
+        if(nombre != null){
+            var cookieValue = $.cookie(value);
+
+            if(cookieValue != null) {
+                return cookieValue;
+            }
+        }
+        return 0;
+    }
+
+    function getLWCount() {
+        var cookieData = $.cookie('lw-tracking-olev2');
+        var oData = {};
+        if(cookieData != '' && cookieData != null){
+            oData = JSON.parse(cookieData);
+        }
+        return typeof(oData.urls) == 'undefined' ? 0 : oData.urls.length;
+    }
+
+    function getAge() {
+        if(getGenDate("Pase-fecNac")){
+            var today = new Date();
+            var birthDate = new Date(getGenDate("Pase-fecNac"));
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age.toString();
+        }
+        return "";
+    }
+
+    adskv = {
+        'section': [''],
+        'kw_width': [$(window).width().toString()],
+        'kw_height': [$(window).height().toString()],
+        'kw_login_edad': [getAge()],
+        'kw_login_sexo': [getGenDate("Pase-genero").toString()],
+        'kw_referer': [document.referrer],
+        'kw_tags': [''],
+        'kw_keywords': [''],
+        'kw_pw_counter': [getLWCount().toString()],
+        'kw_time': [Math.floor(Date.now() / 1000).toString()],
+    }
+
+    document.body.dataset.adspath = "ole/home";
+    document.body.dataset.adskv = JSON.stringify(adskv);
+
+        </script>
+        <div class="posicionBanner">
+            <div id='flotante3' class='ad-slot' data-adtype='flotante3'></div>
+        </div>
+        <div id='flotante1' class='ad-slot' data-adtype='flotante1'></div>
+        <div id='flotante2' class='ad-slot' data-adtype='flotante2'></div>
+        <div class="virtualHeader">
+            <div class="content-top front ">
+                <a href="/" title="OL&Eacute; Home page">
+                    <h1>
+                        <span class="bb-noshow">Ol&eacute;</span>
+                    </h1>
+                </a>
+                <div class="nav-top">
+                    <div class="navMenu-home">
+                        <div class="date" id="fecha-hora-header">
+                            <header class="site-header" data-sectionId="1" id="headerHome">
+                                <div>
+                                    <div>
+                                        <a class="site-logo" href="https://www.ole.com.ar" title="Logo Olé" target="_self">
+                                            <img src="/static/OLEOleV2/images/logo-ole.png" width="191" height="142" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="header-top">
+                                    <div class="clearfix">
+                                        <div id="rrss_header"></div>
+                                        <nav class="site-menu-top">
+                                            <span id="agendaEstadistica">
+                                                <a href="/estadisticas/futbol/copa-libertadores.html" title="Estadísticas">
+                                                    <span class="icon stats"></span>
+                                                    <span class="text statstxt"></span>
+                                                </a>
+                                                <a href="/agenda-deportiva/" target="_self" title="Agenda">
+                                                    <span class="icon diary"></span>
+                                                    <span class="text diarytxt"></span>
+                                                </a>
+                                            </span>
+                                            <div id="getGigyaSectionId" style="display: none;">1</div>
+                                            <div class="user-login notLoggedPase">
+                                                <a href="#" title="Ingresa a Olé">
+                                                    <span class="avatar userUnLogG"></span>
+                                                    <span class="text"></span>
+                                                </a>
+                                            </div>
+                                            <div class="user-login logged">
+                                                <a href="#" title="Ver mi perfil">
+                                                    <img class="avatar userLogG" width="28" height="28" />
+                                                    <span class="text"></span>
+                                                    <span class="icon moremenu"></span>
+                                                </a>
+                                                <div class="modal modal-user">
+                                                    <a class="paseMiCuenta" title="Ir a mi cuenta"></a>
+                                                    <a id="mis-preferencias" title="Ir a mis Preferencias"></a>
+                                                    <a class="paseLogOut" title="Salir de Olé"></a>
+                                                </div>
+                                            </div>
+                                        </nav>
+                                    </div>
+                                    <nav class="site-menu clearfix stListoTop">
+                                        <ul class="pull-left">
+                                            <li>
+                                                <a href="https://www.ole.com.ar/futbol-primera/" title="Primera" target="_self">Primera</a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.ole.com.ar/futbol-ascenso/" title="Ascenso" target="_self">Ascenso</a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.ole.com.ar/futbol-internacional/" title="Internacional" target="_self">Internacional</a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.ole.com.ar/futbol-internacional/libertadores" title="Libertadores" target="_self">Libertadores</a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.ole.com.ar/seleccion/" title="Selección" target="_self">Selección</a>
+                                            </li>
+                                            <li>
+                                                <a href="/esports/" title="ESPORTS" target="_self">ESPORTS</a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.ole.com.ar/futbol-femenino/" title="FUT. FEMENINO" target="_self">FUT. FEMENINO</a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.ole.com.ar/basquet" title="BASQUET" target="_self">BASQUET</a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.ole.com.ar/rugby/" title="Rugby" target="_self">Rugby</a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.ole.com.ar/tenis/" title="TENIS" target="_self">TENIS</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" title="Ver más detallado" class="open-menu">
+Mas
+
+                                                    <span class="icon moremenu"></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="modal modal-menu megamenu" id="megaMenuHeader"></div>
+                                        <span class="icon search-grey"></span>
+                                    </nav>
+                                </div>
+                                <script type="text/javascript"> 
+        function submitSearch(){
+            textoABuscar = $('#search_text').val();
+            document.location = 'https://www.ole.com.ar/buscador?q=' + textoABuscar;
+            return false;
+        }
+    </script>
+                                <form class="site-search" method="get" action="#" onsubmit="submitSearch(); return false;">
+                                    <div class="row">
+                                        <fieldset>
+                                            <input id="search_text" type="text" name="text" value="" />
+                                            <button type="submit" target="_parent" onclick="submitSearch(); return false;">Buscar</button>
+                                        </fieldset>
+                                        <span class="icon close"></span>
+                                    </div>
+                                </form>
+                                <ul class="club-list clearfix club-listHeader">
+                                    <li>
+                                        <a href="https://www.ole.com.ar/aldosivi/" target="_self" data-equipo="Aldosivi">
+                                            <span class="Torneo30 v2EscudosPrimera aldosivi"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/argentinos/" target="_self" data-equipo="Argentinos">
+                                            <span class="Torneo30 v2EscudosPrimera argentinos"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/arsenal/" target="_self" data-equipo="Arsenal">
+                                            <span class="Torneo30 v2EscudosPrimera arsenal"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/atletico-tucuman/" target="_self" data-equipo="Atletico Tucuman">
+                                            <span class="Torneo30 v2EscudosPrimera atletico-tucuman"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/banfield/" target="_self" data-equipo="Banfield">
+                                            <span class="Torneo30 v2EscudosPrimera banfield"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/boca-juniors/" target="_self" data-equipo="Boca">
+                                            <span class="Torneo30 v2EscudosPrimera boca-juniors"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/central-cordoba-santiago-del-estero/" target="_self" data-equipo="Central Cordoba">
+                                            <span class="Torneo30 v2EscudosPrimera central-cordoba-santiago-del-estero"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/colon/" target="_self" data-equipo="Colon">
+                                            <span class="Torneo30 v2EscudosPrimera colon"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/defensa-y-justicia/" target="_self" data-equipo="Defensa y Justicia">
+                                            <span class="Torneo30 v2EscudosPrimera defensa-y-justicia"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/estudiantes/" target="_self" data-equipo="Estudiantes">
+                                            <span class="Torneo30 v2EscudosPrimera estudiantes"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/gimnasia-y-esgrima/" target="_self" data-equipo="Gimnasia">
+                                            <span class="Torneo30 v2EscudosPrimera gimnasia-y-esgrima"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/godoy-cruz/" target="_self" data-equipo="Godoy Cruz">
+                                            <span class="Torneo30 v2EscudosPrimera godoy-cruz"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/huracan/" target="_self" data-equipo="Huracan">
+                                            <span class="Torneo30 v2EscudosPrimera huracan"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/independiente/" target="_self" data-equipo="Independiente">
+                                            <span class="Torneo30 v2EscudosPrimera independiente"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/lanus/" target="_self" data-equipo="Lanus">
+                                            <span class="Torneo30 v2EscudosPrimera lanus"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/newells-old-boys/" target="_self" data-equipo="Newells">
+                                            <span class="Torneo30 v2EscudosPrimera newells-old-boys"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/patronato/" target="_self" data-equipo="Patronato">
+                                            <span class="Torneo30 v2EscudosPrimera patronato"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/racing/" target="_self" data-equipo="Racing">
+                                            <span class="Torneo30 v2EscudosPrimera racing"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/river-plate/" target="_self" data-equipo="River">
+                                            <span class="Torneo30 v2EscudosPrimera river-plate"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/rosario-central/" target="_self" data-equipo="Rosario Central">
+                                            <span class="Torneo30 v2EscudosPrimera rosario-central"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/san-lorenzo/" target="_self" data-equipo="San Lorenzo">
+                                            <span class="Torneo30 v2EscudosPrimera san-lorenzo"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/talleres/" target="_self" data-equipo="Talleres">
+                                            <span class="Torneo30 v2EscudosPrimera talleres"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/union/" target="_self" data-equipo="Union">
+                                            <span class="Torneo30 v2EscudosPrimera union"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.ole.com.ar/velez/" target="_self" data-equipo="Velez">
+                                            <span class="Torneo30 v2EscudosPrimera velez"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </header>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+    $(document).ready(function() {
+        $.get("/header_rrss.html?sectionId=1", function(_response){
+            response = BBT.fixJson(_response);
+            $('#rrss_header').html(response.data);
+        });
+    });
+</script>
+        <style type="text/css">
+    #bd-e .site-header.header-generic{display: block !important;}
+</style>
+        <div id="doc9">
+            <div id="content" class="home page-summary">
+                <div id="bd">
+                    <script type="text/javascript">
+	// Refresco de página - home
+        refresh_on = true;
+
+        function refresh_Play(){
+            metricsRefresh(5);
+        }
+
+        refresh_Play();
+</script>
+                    <div id="oas_ad_pos4"></div>
+                    <div id='horizontal1' class='ad-slot' data-adtype='horizontal1'></div>
+                    <div class="bb-gtg">
+                        <div class="color-contenedor">
+                            <span class="modal-home"></span>
+                            <div class="bb-md bb-md-cajas scrollV2">
+                                <div class="bd">
+                                    <div class="bb-gt">
+                                        <div class="first">
+                                            <div class="colorContainer">
+                                                <div class="bb-gt row opening100">
+                                                    <div>
+                                                        <a href="https://www.ole.com.ar/coronavirus/" title="" target="_self">
+                                                            <img class="imgLibreCen" src="https://images.ole.com.ar/bbtfile/6004_20200318d0AEBd.jpeg" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="bb-gt row opening100">
+                                                    <div class="col col_12">
+                                                        <article id="modNot-100_mod_202032348246386" class="entry entry-box superD ">
+                                                            <figure class="entry-media">
+                                                                <a target="_self" href="/velez/pellegrino-conferencia-velez-virtual_0_s-qYwHH5g.html">
+                                                                    <meta itemprop="description" content="">
+                                                                    <img src="https://images.ole.com.ar/2020/04/21/jh0CHe-t6_1000x472__1.jpg#1587514378430" />
+                                                                    <img class="img-vid-opening-model0-2 ">
+                                                                </a>
+                                                                <span class="entry-label">VELEZ</span>
+                                                            </figure>
+                                                            <div class="entry-data entry-data-301" data-infocontentid="s-qYwHH5g">
+                                                                <h2 class="entry-title">
+                                                                    <a target="_self" href="/velez/pellegrino-conferencia-velez-virtual_0_s-qYwHH5g.html" title="Pellegrino: &quot;Doble desaf&iacute;o personal y profesional&quot;">
+Pellegrino: &quot;Doble desaf&iacute;o personal y profesional&quot;
+</a>
+                                                                </h2>
+                                                                <div class="entry-excerpt">
+                                                                    <p>
+                                                                        <p>El Flaco expresó sus sensaciones por este chance que se le presenta en el Fortín. Estuvo acompañado de forma virtual por el presidente Rapisarda y el manager Cavallero. Acá, sus frases.</p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </article>
+                                                    </div>
+                                                    <div class="col col_12">
+                                                        <article id="modNot-100_mod_202032851060489" class="entry entry-box superD ">
+                                                            <figure class="entry-media">
+                                                                <a target="_self" href="/boca-juniors/boca-bayern-falta-jugada-gol_0_r8aRMvEwD.html">
+                                                                    <meta itemprop="description" content="">
+                                                                    <img src="https://images.ole.com.ar/2020/04/21/24EBll_9r_1000x472__1.jpg#1587507138006" />
+                                                                    <img class="img-vid-opening-model0-2 ">
+                                                                </a>
+                                                                <span class="entry-label">BOCA</span>
+                                                            </figure>
+                                                            <div class="entry-data entry-data-301" data-infocontentid="r8aRMvEwD">
+                                                                <h2 class="entry-title">
+                                                                    <a target="_self" href="/boca-juniors/boca-bayern-falta-jugada-gol_0_r8aRMvEwD.html" title="&iquest;Qu&eacute; dijo Elber, el de la falta en el gol del Bayern del 2001?">
+&iquest;Qu&eacute; dijo Elber, el de la falta en el gol del Bayern del 2001?
+</a>
+                                                                </h2>
+                                                                <div class="entry-excerpt">
+                                                                    <p>
+                                                                        <p>El brasileño que fue protagonista de la jugada polémica de la final de la Intercontinental habló en exclusiva con Olé y repasó la acción que le quitó a Boca el bicampeonato del mundo. ¡Mirá!</p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </article>
+                                                    </div>
+                                                    <div class="col col_12">
+                                                        <article id="modNot-100_mod_202032345826857" class="entry entry-box superD ">
+                                                            <figure class="entry-media">
+                                                                <a target="_self" href="/river-plate/lucaspratto-historia-river_0_FCVEbySQA.html">
+                                                                    <meta itemprop="description" content="">
+                                                                    <img src="https://images.ole.com.ar/2020/04/21/EPi0qD2aE_1000x472__1.jpg#1587505300081" />
+                                                                    <img class="img-vid-opening-model0-2 ">
+                                                                </a>
+                                                                <span class="entry-label">RIVER</span>
+                                                            </figure>
+                                                            <div class="entry-data entry-data-301" data-infocontentid="FCVEbySQA">
+                                                                <h2 class="entry-title">
+                                                                    <a target="_self" href="/river-plate/lucaspratto-historia-river_0_FCVEbySQA.html" title="Pratto: los 14 palos, h&eacute;roe en Madrid y un futuro incierto">
+Pratto: los 14 palos, h&eacute;roe en Madrid y un futuro incierto
+</a>
+                                                                </h2>
+                                                                <div class="entry-excerpt">
+                                                                    <p>
+                                                                        <p>En Olé repasamos la historia de Lucas en River. Desde su millonario desembarco, sus goles ante Boca en la final de la Libertadores de 2018 y la pérdida de la titularidad que pone en duda su estadía en el club.</p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </article>
+                                                    </div>
+                                                    <div class="col col_12">
+                                                        <article id="modNot-100_mod_202032173823210" class="entry entry-summary modNot-100 ">
+                                                            <figure class="entry-media">
+                                                                <a target="" href="/-/ruggeri-niembro-cuarentena_0_etQAzWEZm.html">
+                                                                    <img src="https://images.ole.com.ar/2020/04/21/jAAq2HcZM_660x324__1.jpg#1587508401636" width="" height="" alt="Niembro y Ruggeri." />
+                                                                    <div class="img-vid-opening-model0-2 iconoVideo"></div>
+                                                                </a>
+                                                                <span class="entry-label">RIVER</span>
+                                                            </figure>
+                                                            <div class="entry-data entry-data-324" data-infocontentid="etQAzWEZm">
+                                                                <h2 class="entry-title">
+                                                                    <a itemprop="headline name" target="_self" href="/-/ruggeri-niembro-cuarentena_0_etQAzWEZm.html" title="El d&iacute;a que Ruggeri lo encar&oacute; mal a Niembro">
+El d&iacute;a que Ruggeri lo encar&oacute; mal a Niembro
+</a>
+                                                                </h2>
+                                                                <div class="entry-excerpt">
+                                                                    <p>
+                                                                        <p>El periodista contó en una de las Charlas en cuarentena con Olé una divertida anécdota con el Cabezón. Fernando dijo que jugó mal y al defensor no le gustó nada...</p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </article>
+                                                    </div>
+                                                </div>
+                                                <div class="bb-gt row opening100">
+                                                    <div class="bb-md-adv7 banner">
+                                                        <div class="bd">
+                                                            <div id='horizontal3' class='ad-slot' data-adtype='horizontal3'></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="on-demand" data-src="/ondemand/eyJtYyI6Ik9MRU9sZUNvbnRhaW5lckJNTyIsImNpZCI6ImNvbnRhaW5lcl9ob21lXzAiLCJtaWQiOiJtb2RfMjAyMDM0ODUyODg4Mjk4IiwiYmlkIjoiMSIsImJ2aWQiOiIyMDIwMDQyMV8wMDUwIiwibiI6IjEifQ==.json"></div>
+                            <div class="on-demand" data-src="/ondemand/eyJtYyI6Ik9MRU9sZUNvbnRhaW5lckJNTyIsImNpZCI6ImNvbnRhaW5lcl9ob21lXzAiLCJtaWQiOiJtb2RfMjAxODcyNjI2MDM5NDE1IiwiYmlkIjoiMSIsImJ2aWQiOiIyMDIwMDQyMV8wMDUwIiwibiI6IjIifQ==.json"></div>
+                            <div class="on-demand" data-src="/ondemand/eyJtYyI6Ik9MRU9sZUNvbnRhaW5lckJNTyIsImNpZCI6ImNvbnRhaW5lcl9ob21lXzAiLCJtaWQiOiJtb2RfMjAxNzU0NjI0OTU3MTIxIiwiYmlkIjoiMSIsImJ2aWQiOiIyMDIwMDQyMV8wMDUwIiwibiI6IjMifQ==.json"></div>
+                            <div class="on-demand" data-src="/ondemand/eyJtYyI6Ik9MRU9sZUNvbnRhaW5lckJNTyIsImNpZCI6ImNvbnRhaW5lcl9ob21lXzAiLCJtaWQiOiJtb2RfMjAxOTEzMTQ5NTcwOTkxIiwiYmlkIjoiMSIsImJ2aWQiOiIyMDIwMDQyMV8wMDUwIiwibiI6IjQifQ==.json"></div>
+                            <div class="on-demand" data-src="/ondemand/eyJtYyI6Ik9MRU9sZUNvbnRhaW5lckJNTyIsImNpZCI6ImNvbnRhaW5lcl9ob21lXzAiLCJtaWQiOiJtb2RfMjAxNjU0ODI4NjgzMjI2IiwiYmlkIjoiMSIsImJ2aWQiOiIyMDIwMDQyMV8wMDUwIiwibiI6IjUifQ==.json"></div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+        // debounce function that will wrap our event
+        function debounce(fn, delay) {
+          // maintain a timer
+          let timer = null;
+          // closure function that has access to timer
+          return function() {
+            // get the scope and parameters of the function 
+            // via 'this' and 'arguments'
+            let context = this;
+            let args = arguments;
+            // if event is called, clear the timer and start over
+            clearTimeout(timer);
+            timer = setTimeout(function() {
+              fn.apply(context, args);
+            }, delay);
+          }
+        }
+        schneiderBannerAlreadySeen = false;
+        function isSchneiderBannerScrolledIntoView()
+        {
+            if (!schneiderBannerAlreadySeen) {
+                var elem = $("#homeBannerSchneider");
+                if (elem.length == 0) {
+                     window.removeEventListener('scroll', isSchneiderBannerScrolledIntoView);
+                    return true;
+                }
+                var docViewTop = $(window).scrollTop();
+                var docViewBottom = docViewTop + $(window).height();
+
+                var elemTop = $(elem).offset().top;
+                var elemBottom = elemTop + $(elem).height();
+
+                if ((elemBottom <= docViewBottom) && (elemTop >= docViewTop)) {
+                    schneiderBannerAlreadySeen = true;
+                    window.removeEventListener('scroll', isSchneiderBannerScrolledIntoView);
+                    var script = document.createElement("script");
+                    script.lang = "JavaScript1.1";
+                    script.src = "https://ad.doubleclick.net/ddm/trackimpj/N249001.2284904OL/B21937119.234787293;dc_trk_aid=432339691;dc_trk_cid=83358429;ord=[timestamp];dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=?"; 
+                    document.getElementsByTagName("head")[0].appendChild(script);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        window.addEventListener('scroll', debounce(isSchneiderBannerScrolledIntoView, 200));
+    
+                    </script>
+                    <script type="text/javascript">
+                $(window).on("keydown", function(e) {
+                    if (e.which == 27) {
+                        $('.popup-close').click();
+                    }
+                });
+                var lastElement = $(".on-demand").last().index();
+                var el = $(".on-demand").first();
+                // "false" - El funcionamiento de la pagina es scroll a demanda del usuario.
+                // "true" -  Los scroll se cargan automaticamente.
+                var autoLoadScroll = false;
+
+                $(document).ready(function(){
+                    if(lastElement != -1) {
+                        $('footer').hide();
+                    }
+                });
+
+                function getOnDemandNumber(){
+                    var cantidad_total = $(".on-demand").length;
+                    $(".on-demand").each(function(index){
+                        if ($(this).html() == '') {
+                            cantidad_total--;
+                        }
+                    });  
+                    return cantidad_total + 1;                  
+                }
+
+                var updateOnDemand = function(e) {
+                    $(window).unbind("scroll.OnDemand");
+                    var index_scroll = getOnDemandNumber();
+                   // uid_call("web.home.scroll-on-demand."+index_scroll, "event");
+                    try{
+                        $.ajax({
+                            type: 'GET',
+                            url: e.data("src"),
+                            beforeSend: function(){
+                                e.html('
+                        <div class="demand-loading">
+                            <div class=centerLoading>
+                                <img src="/static/OLEOleV2/images/loading.gif">
+                                <p>Cargando...</p>
+                            </div>
+                        </div>');
+                            },
+                            complete: function(_response){
+
+                                if (typeof BBT == "undefined"){return;}
+                                response = BBT.fixJson(_response['responseText']);
+                                if(!response){
+                                    return;
+                                }
+                                if (response.error == 0) {
+                                    e.html(response.data);
+                                    e.find(".sticky-spacer > [data-stick]").stickAll();
+                                    if(lastElement!=-1){
+                                        if ( e.index() != lastElement ) {
+                                            el = e.next(".on-demand");
+                                            updateBody();
+                                            if (typeof ads != "undefined") {
+                                                ads.pending();
+                                            } 
+                                        }else{
+                                            $('footer').show();
+                                        }
+                                    }else{
+                                        $('footer').show();
+                                    }
+                                    
+                                    OLE.Modules.initialize();
+                                    initVideos();
+                                }
+                            }
+                        });
+                    }catch(err){
+                        console.log("on demand Error: "+err);
+                    }   
+                }
+
+                function checkScroll(e) {
+                    
+                    var altoScroll = $('body').height() - $('footer').height();;
+                    var porcCargaScroll = altoScroll - ($(window).height() + 50 );
+                    
+                    if ($(window).scrollTop() >= porcCargaScroll){
+                        updateOnDemand(e);
+                    }
+                }
+
+                function updateBody () {
+                    if(autoLoadScroll)
+                    {
+                        checkScroll(el);
+                        updateOnDemand(el);
+                    }else{
+                        if ($(window).height() >= $("body").height() ) {
+                            updateOnDemand(el);
+                        } else {
+                            $('footer').hide();
+                            $(window).bind("scroll.OnDemand", function(){
+                                checkScroll(el);
+                            })
+                        }
+                    }
+                }
+
+                var twtScript = document.createElement("script");
+                twtScript.type = "text/javascript";
+                twtScript.src = "//platform.twitter.com/widgets.js";
+                $("head").append(twtScript);
+
+                $(document).ready(function() {
+                    if($("body").height()< $(window).height()) {
+                        updateOnDemand(el);
+                    }
+                });
+
+                if ( typeof el.html() != "undefined" ){
+                    updateBody();
+                }
+            
+                    </script>
+                    <div class="up-to-top">
+                        <span class="icon top"></span>
+Subir
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="application/javascript">
+    function GDPRInit() {
+        var scriptJS = document.createElement('script');
+        if(scriptJS.readyState) {
+            scriptJS.onreadystatechange = function() {
+                if ( scriptJS.readyState === "loaded" || scriptJS.readyState === "complete" ) {
+                    scriptJS.onreadystatechange = null;
+                    GDPRStart()
+                }
+            };
+        } else{
+            // others
+            scriptJS.onload = function() {
+                GDPRStart()
+            }
+        }
+        scriptJS.src = "/commons/js/GDPRCookiePolicy.js";
+        document.documentElement.appendChild(scriptJS);
+    }
+</script>
+        <footer class="site-footer">
+            <div class="row">
+                <div class="col col_12">
+                    <div class="footer-top clearfix">
+                        <a href="#" class="newsletter-subscribe">
+                            <span class="icon mail-medium"></span>
+                        </a>
+                        <div class="follow-us">
+                            <p></p>
+                            <a data-dax="facebook" class="icon fb-medium-black footer-link" target="_blank" href="https://www.facebook.com/diarioole/" title="Seguinos en Facebook"></a>
+                            <a data-dax="twitter" class="icon tw-medium-black footer-link" target="_blank" href="https://twitter.com/diarioole/" title="Seguinos en Twitter"></a>
+                            <a data-dax="google.plus" class="icon gp-medium-black footer-link" target="_blank" href="https://plus.google.com/+diarioole/" title="Seguinos en Google+"></a>
+                            <a data-dax="instagram" class="icon ig-medium-black footer-link" target="_blank" href="https://www.instagram.com/diario.ole/" title="Seguinos en Instagram"></a>
+                            <a data-dax="youtube" class="icon yt-medium-black footer-link" target="_blank" href="https://www.youtube.com/user/DiariOle/" title="Seguinos en Youtube"></a>
+                            <a data-dax="rss" class="icon rss-medium-black footer-link" target="_blank" href="https://www.ole.com.ar/rss/ultimas-noticias/" title="RSS"></a>
+                        </div>
+                    </div>
+                    <div class="footer-medium clearfix">
+                        <div class="footer-sitemap">
+                            <div class="footer-columns">
+                                <a data-dax="futbol.argentino" class="footer-link" href="https://www.ole.com.ar/futbol-primera" title="Futbol  Argentino">
+                                    <h5>Futbol Argentino</h5>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a title="Selección" data-dax="seleccion" class="footer-link" href="https://www.ole.com.ar/seleccion/">Selección</a>
+                                    </li>
+                                    <li>
+                                        <a title="Primera" data-dax="primera" class="footer-link" href="https://www.ole.com.ar/futbol-primera/">Primera</a>
+                                    </li>
+                                    <li>
+                                        <a title="B Nacional" data-dax="b.nacional" class="footer-link" href="https://www.ole.com.ar/futbol-ascenso/b-nacional/">B Nacional</a>
+                                    </li>
+                                    <li>
+                                        <a title="Copa Argentina" data-dax="copa.argentina" class="footer-link" href="https://www.ole.com.ar/copa-argentina/">Copa Argentina</a>
+                                    </li>
+                                    <li>
+                                        <a title="Primera B" data-dax="primera.b" class="footer-link" href="https://www.ole.com.ar/futbol-ascenso/primera-b/">Primera B</a>
+                                    </li>
+                                    <li>
+                                        <a title="Primera C" data-dax="primera.c" class="footer-link" href="https://www.ole.com.ar/futbol-ascenso/primera-c/">Primera C</a>
+                                    </li>
+                                    <li>
+                                        <a title="Primera D" data-dax="primera.d" class="footer-link" href="https://www.ole.com.ar/futbol-ascenso/primera-d/">Primera D</a>
+                                    </li>
+                                    <li>
+                                        <a title="Estadísticas" data-dax="estadisticas.futbol.argentino" class="footer-link" href="https://www.ole.com.ar/estadisticas/futbol/primera-division.html">Estadísticas</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="footer-columns">
+                                <a data-dax="futbol.internacional" class="footer-link" href="https://www.ole.com.ar/futbol-internacional" title="Futbol  Internacional">
+                                    <h5>Futbol Internacional</h5>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a title="Copa Libertadores" data-dax="copa.libertadores" class="footer-link" href="https://www.ole.com.ar/futbol-internacional/libertadores/">Copa Libertadores</a>
+                                    </li>
+                                    <li>
+                                        <a title="Copa Sudamericana" data-dax="copa.sudamericana" class="footer-link" href="https://www.ole.com.ar/futbol-internacional/sudamericana/">Copa Sudamericana</a>
+                                    </li>
+                                    <li>
+                                        <a title="América" data-dax="america" class="footer-link" href="https://www.ole.com.ar/futbol-internacional/america/">América</a>
+                                    </li>
+                                    <li>
+                                        <a title="España" data-dax="españa" class="footer-link" href="https://www.ole.com.ar/futbol-internacional/espana/">España</a>
+                                    </li>
+                                    <li>
+                                        <a title="Italia" data-dax="italia" class="footer-link" href="https://www.ole.com.ar/futbol-internacional/italia/">Italia</a>
+                                    </li>
+                                    <li>
+                                        <a title="Inglaterra" data-dax="inglaterra" class="footer-link" href="https://www.ole.com.ar/futbol-internacional/inglaterra/">Inglaterra</a>
+                                    </li>
+                                    <li>
+                                        <a title="Champions League" data-dax="champions.league" class="footer-link" href="https://www.ole.com.ar/futbol-internacional/champions/">Champions League</a>
+                                    </li>
+                                    <li>
+                                        <a title="Europa League" data-dax="europa.league" class="footer-link" href="https://www.ole.com.ar/futbol-internacional/europa-league/">Europa League</a>
+                                    </li>
+                                    <li>
+                                        <a title="Estadísticas" data-dax="estadisticas.futbol.internacional" class="footer-link" href="https://www.ole.com.ar/estadisticas/futbol/liga-espanola.html">Estadísticas</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="footer-columns">
+                                <h5>Mas deportes</h5>
+                                <ul>
+                                    <li>
+                                        <a title="Basquet" data-dax="basquet" class="footer-link" href="https://www.ole.com.ar/basquet/">Basquet</a>
+                                    </li>
+                                    <li>
+                                        <a title="Rugby" data-dax="rugby" class="footer-link" href="https://www.ole.com.ar/rugby/">Rugby</a>
+                                    </li>
+                                    <li>
+                                        <a title="Tenis" data-dax="tenis" class="footer-link" href="https://www.ole.com.ar/tenis/">Tenis</a>
+                                    </li>
+                                    <li>
+                                        <a title="Polideportivo" data-dax="polideportivo" class="footer-link" href="https://www.ole.com.ar/poli/">Polideportivo</a>
+                                    </li>
+                                    <li>
+                                        <a title="Running" data-dax="running" class="footer-link" href="https://www.ole.com.ar/running/">Running</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="footer-columns">
+                                <h5>Otros</h5>
+                                <ul>
+                                    <li>
+                                        <a title="Contáctenos" data-dax="contactenos" class="footer-link" href="https://www.ole.com.ar/contactenos.html">Contáctenos</a>
+                                    </li>
+                                    <li>
+                                        <a title="Agenda" data-dax="agenda" class="footer-link" href="https://www.ole.com.ar/agenda-deportiva/">Agenda</a>
+                                    </li>
+                                    <li>
+                                        <a title="Olé TeVé" data-dax="ole.teve" class="footer-link" href="https://www.ole.com.ar/oleteve/">Olé TeVé</a>
+                                    </li>
+                                    <li>
+                                        <a title="Fuera de Juego" data-dax="fuera.de.juego" class="footer-link" href="https://www.ole.com.ar/fuera-de-juego/">Fuera de Juego</a>
+                                    </li>
+                                    <li>
+                                        <a title="Olé Radio" data-dax="ole.radio" class="footer-link" href="http://player.cienradios.com/radiole">Olé Radio</a>
+                                    </li>
+                                    <li>
+                                        <span title="Términos y Condiciones" class="terminos footer-link" data-dax="terminos.condiciones" style="cursor:pointer;">Términos y Condiciones</span>
+                                    </li>
+                                    <li>
+                                        <span title="Normas de privacidad y confidencialidad" class="normas footer-link" data-dax="terminos.condiciones" style="cursor:pointer;">Normas de privacidad y confidencialidad</span>
+                                    </li>
+                                    <li>
+                                        <a title="Coronavirus Argentina" data-dax="Coronavirus Argentina" class="footer-link" href="https://www.ole.com.ar/coronavirus/">Coronavirus</a>
+                                    </li>
+                                </ul>
+                                <h5>Aplicaciones</h5>
+                                <ul class="aplicaciones">
+                                    <li>Olé
+
+                                        <a href="https://play.google.com/store/apps/details?id=com.ole.mobile&hl=es" data-dax="ole.android" class="footer-link">
+                                            <img src="/static/OLEOleV2/images/icon-android.png" width="20" height="20">
+                                        </a>
+                                        <a href="https://itunes.apple.com/ar/app/ole-deportes-24hs/id424496663?mt=8" data-dax="ole.iphone" class="footer-link">
+                                            <img src="/static/OLEOleV2/images/icon-apple.png" width="20" height="20">
+                                        </a>
+                                    </li>
+                                    <li>Olé Resultados
+
+                                        <a href="https://play.google.com/store/apps/details?id=com.kokteyl.ole" data-dax="ole.resultados.android" class="footer-link">
+                                            <img src="/static/OLEOleV2/images/icon-android.png" width="20" height="20">
+                                        </a>
+                                        <a href="https://itunes.apple.com/ar/app/resultados-ole/id845077591?mt=8" data-dax="ole.resultados.iphone" class="footer-link">
+                                            <img src="/static/OLEOleV2/images/icon-apple.png" width="20" height="20">
+                                        </a>
+                                    </li>
+                                    <li>OléTevé
+
+                                        <a href="https://play.google.com/store/apps/details?id=com.agea.clarin.olevideos&hl=es_419" data-dax="ole.oleteve.android" class="footer-link">
+                                            <img src="/static/OLEOleV2/images/icon-android.png" width="20" height="20">
+                                        </a>
+                                        <a href="https://itunes.apple.com/us/app/oleteve/id988917488?mt=8" data-dax="ole.oleteve.iphone" class="footer-link">
+                                            <img src="/static/OLEOleV2/images/icon-apple.png" width="20" height="20">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="footer-tapa">
+                            <div onclick="javascript: OLE.Popup.open('popup-tapa');return false;">
+                                <h5>Ultima Edicion</h5>
+                                <a href="https://tapas2.ole.com.ar/tapa/2020/04/21/OLE_20200421_02.jpg" class="vModal-tapaOle footer-link" data-dax="ultima.edicion">
+                                    <img id="imgTapa" src="https://tapas2.ole.com.ar/tapa/2020/04/21/OLE_20200421_04.jpg" width="141" height="197" alt="Tapa de Hoy" />
+                                </a>
+                            </div>
+                            <div class="ft">
+                                <a href="https://www.ole.com.ar/tapas-ole/" target="_blank"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="popup-tapa" class="popup popup-fullscreen popup-tapa darkSkin">
+                        <div class="popup-overlay" onclick="javascript: OLE.Popup.close( this );return false;"></div>
+                        <div class="popup-main">
+                            <div class="popup-header">
+                                <h5 class="popup-title">
+                                    <a data-dax="tapas.anteriores" class="footer-link" href="https://www.ole.com.ar/tapas-ole/" target="_blank" title="Ver tapas de Olé anteriores">
+                                        <span class="icon tapa-small"></span>
+                                    </a>
+                                </h5>
+                                <span class="popup-close" onclick="javascript: OLE.Popup.close( this );return false;">
+                                    <span class="icon close-white"></span>
+                                </span>
+                            </div>
+                            <div class="popup-content">
+                                <img src="https://tapas2.ole.com.ar/tapa/2020/04/21/OLE_20200421_02.jpg" width="460" height="630" alt="" />
+                                <div class="tapa-share clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>1998-2020 Ole.com.ar - Propietario Arte Gráfico Editorial Argentino S.A. Piedras 1743 - Director: Mariano Dayan</p>
+                        <p>Registro de Propiedad Intelectual: 4627007 - 21 de Abril de 2020 - Edición N°: 8715</p>
+                    </div>
+                </div>
+            </div>
+            <div class="otherSites">
+                <div class="row">
+                    <ul>
+                        <li>
+                            <a class="footer-link" data-dax="grupo.clarin" href="https://www.grupoclarin.com.ar/" target="_blank" rel="nofollow">Grupo Clar&iacute;n</a>
+                        </li>
+                        <li>
+                            <a class="footer-link" data-dax="clarin" href="https://www.clarin.com/" target="_blank" rel="nofollow">Clar&iacute;n</a>
+                        </li>
+                        <li>
+                            <a class="footer-link" data-dax="ole" href="https://www.ole.com.ar/" target="_blank" rel="nofollow">Olé</a>
+                        </li>
+                        <li>
+                            <a class="footer-link" data-dax="tn" href="https://tn.com.ar/" target="_blank" rel="nofollow">TN</a>
+                        </li>
+                        <li>
+                            <a class="footer-link" data-dax="tycsports" href="https://www.tycsports.com/" target="_blank" rel="nofollow">TyCSports</a>
+                        </li>
+                        <li>
+                            <a class="footer-link" data-dax="ciudad" href="https://www.ciudad.com.ar/" target="_blank" rel="nofollow">Ciudad</a>
+                        </li>
+                        <li>
+                            <a class="footer-link" data-dax="el.trece.tv" href="https://www.eltrecetv.com.ar/" target="_blank" rel="nofollow">El Trece TV</a>
+                        </li>
+                        <li>
+                            <a class="footer-link" data-dax="via.pais" href="https://www.viapais.com.ar" target="_blank" rel="nofollow">ViaPais</a>
+                        </li>
+                        <li>
+                            <a class="footer-link" data-dax="la.voz.del.interior" href="https://www.lavoz.com.ar/" target="_blank" rel="nofollow">La Voz del Interior</a>
+                        </li>
+                        <li>
+                            <a class="footer-link" data-dax="los.andes" href="https://www.losandes.com.ar/" target="_blank" rel="nofollow">Los Andes</a>
+                        </li>
+                        <li>
+                            <a class="footer-link" data-dax="mitre" href="https://radiomitre.cienradios.com/" target="_blank" rel="nofollow">Mitre</a>
+                        </li>
+                        <li>
+                            <a class="footer-link" data-dax="la.100" href="https://la100.cienradios.com/" target="_blank" rel="nofollow">La 100</a>
+                        </li>
+                        <li>
+                            <a class="footer-link" data-dax="cienradios" href="https://ar.cienradios.com/" target="_blank" rel="nofollow">Cienradios</a>
+                        </li>
+                        <li>
+                            <a class="footer-link" data-dax="rumbos" href="https://www.rumbosdigital.com/" target="_blank" rel="nofollow">Rumbos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+        <style>
+#cboxLoadedContent {
+    overflow: auto!important;
+}
+</style>
+        <div id="DAt" class="popup darkSkin">
+            <div class="popup-overlay closing-popup" onclick="javascript: OLE.Popup.close( this );return false;">
+                <div class="popup-content dataTerminos"></div>
+            </div>
+            <span class="popup-close closing-popup" onclick="javascript: OLE.Popup.close( this );return false;" style="z-index:9999;">
+                <span class="icon close-white"></span>
+            </span>
+        </div>
+        <script type="text/javascript">
+$(".terminos").click(function(){
+    OLE.Popup.open('DAt');
+    try{
+        $.ajax({
+            type: 'GET',
+            url: '/oleolev2/politica-de-proteccion-de-datos.html',
+            beforeSend: function(){
+                $("#DAt .popup-content").html('
+            <img class="loadTerm" src="/static/OLEOleV2/images/loading.gif">');
+            },
+            complete: function(_response){
+                if (typeof BBT == "undefined"){
+                    return;
+                }
+            
+                response = BBT.fixJson(_response['responseText']);
+                if(!response){
+                    return;
+                }
+                if (response.error == 0) {
+                    $(".loadTerm").remove();
+                    $(".dataTerminos").html(response['data']);
+                }
+            },
+        });
+    }catch(err){
+        console.log("Ajax Error: "+err);
+    }
+
+});
+
+$(".normas").click(function(){
+    OLE.Popup.open('DAt');
+    try{
+        $.ajax({
+            type: 'GET',
+            url: '/oleolev2/normas-de-privacidad-y-confidencialidad.html',
+            beforeSend: function(){
+                $("#DAt .popup-content").html('
+            <img class="loadTerm" src="/static/OLEOleV2/images/loading.gif">');
+            },
+            complete: function(_response){
+                if (typeof BBT == "undefined"){
+                    return;
+                }
+            
+                response = BBT.fixJson(_response['responseText']);
+                if(!response){
+                    return;
+                }
+                if (response.error == 0) {
+                    $(".loadTerm").remove();
+                    $(".dataTerminos").html(response['data']);
+                }
+            },
+        });
+    }catch(err){
+        console.log("Ajax Error: "+err);
+    }
+
+});
+
+$(window).load(function() {    
+    /* detección de footer */
+    var footerPosition = $(document).height() - $(".site-footer").height(),        
+        timeout = null,
+        tracked_footer = false,
+        tracked_temas = false;
+
+    if ($("#temas_section").length > 0){
+        var temasPosition = $("#temas_section").offset().top;
+    }
+    $(window).scroll(function (){
+        var scrollBottomOfThePage = $(window).scrollTop() + $(window).height();
+        if (!tracked_footer){
+            if($('footer').css('display') != "none"){
+                footerPosition = $(document).height() - $(".site-footer").height();
+                if (scrollBottomOfThePage >= footerPosition) {
+                    tracked_footer = true;
+                  //  uid_call("web.footer", "event"); 
+                }
+            }
+        }
+        if (!tracked_temas && temasPosition){
+            if (scrollBottomOfThePage >= temasPosition) {
+                tracked_temas = true;
+               // uid_call("web.findenota", "event"); 
+            }
+        }
+    });
+    
+});
+
+$(document).ready(function() {
+	$(".newsletter-subscribe").click(function() {
+		if($.cookie('idPase')) {
+	        $("#mis-preferencias").click();        
+	        return false;
+		} else {
+			$(paseE2E.settings.placeIngresar+':eq(0)').click();
+			return false;
+		}
+	});
+
+   /* $(".footer-link").click(function() {
+        var link_desc = $(this).attr('data-dax');
+        uid_call("web.footer.link." + link_desc, "click"); 
+    });*/
+
+    $(".related-link").click(function() {
+        var link_aux = $(this).attr('data-dax');
+        var link_desc = "";
+        if (link_aux.indexOf("-")>0){
+            link_aux = link_aux.split("-");
+            if (link_aux[0]=='sum1'){
+                link_desc = "orden." + ((parseInt(link_aux[1]))+1);
+            }else{
+                link_desc = "orden."+link_aux[1];
+            }
+        }else{
+            link_desc = link_aux;
+        }
+      //  uid_call("web.relacionada." + link_desc, "click"); 
+    });
+
+    
+});
+
+        </script>
+        <iframe name="__bkframe" height="0" width="0" frameborder="0" style="display:none;position:absolute;clip:rect(0px 0px 0px 0px)" src="about:blank"></iframe>
+        <script type="text/javascript" src="//tags.bkrtx.com/js/bk-coretag.js"></script>
+        <script type="text/javascript">
+    bk_allow_multiple_calls=true;
+    bk_use_multiple_iframes=true;
+    bk_is_debug=true;
+
+    function sendBlueKai(){
+        try{
+            bk_addPageCtx('section', "Home");
+            bk_addPageCtx('tipo_pagina', "Home");
+            bk_addPageCtx('ns_site', 'ole');
+            bk_addPageCtx('name', "home.inicio");
+            bk_addPageCtx('ET_multimedia', '-2');
+            bk_addPageCtx('kw_referrer', [document.referrer]);
+            bk_addPageCtx('keywords', []);
+            bk_addPageCtx('tags', "-2");
+            bk_addPageCtx('bprivate', window.isPrivateMode);
+            bk_addPageCtx('idPase', getValueFromCookie('idPase') =='' ? "-2" : getValueFromCookie('idPase'));
+            bk_addPageCtx(
+                'pase_sexo', 
+                getValueFromCookie('Pase-genero') =='' ? 
+                    "-2" : getValueFromCookie('Pase-genero')
+            );
+            bk_addPageCtx(
+                'pase_edad', 
+                getAge(getValueFromCookie('Pase-fecNac') =='' ? 
+                    "-2" : getValueFromCookie('Pase-fecNac')
+                )
+            );
+            bk_addPageCtx('contador_gral', getPaseCounter());
+            bk_addPageCtx('block_LW', "no");
+            bk_addPageCtx('block_PW', 'no');
+            bk_addPageCtx('tipo_suscriptor', "-2");
+            bk_addPageCtx('tipo_lector', getValueFromCookie('idPase') =='' ? 0 : 1);
+            bk_addPageCtx('kw_pw_counter', getPaseCounter());
+            bk_addPageCtx('kw_choque', "no");
+            bk_doJSTag(66298, 1);
+        } catch(e) {
+            setTimeout(function(){
+                sendBlueKai();
+            }, 200);
+        }
+    }
+    sendBlueKai();
+</script>
+        <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"ItemList","url":"https://www.ole.com.ar/
+    ","ItemListElement":[
+     {"@type":"ListItem","position":1,"url":"https://www.ole.com.ar/coronavirus/jubilado-detenido-volar-parapente_0_lxRF_8MFK.html"},{"@type":"ListItem","position":2,"url":"https://www.ole.com.ar/velez/pellegrino-conferencia-velez-virtual_0_s-qYwHH5g.html"},{"@type":"ListItem","position":3,"url":"https://www.ole.com.ar/informacion-general/muertos-coronavirus-argentina_0_5oApiueWn.html"},{"@type":"ListItem","position":4,"url":"https://www.ole.com.ar/gimnasia-y-esgrima/gimnasia-pellegrino-maradona-descensos_0_yO1za5rpA.html"},{"@type":"ListItem","position":5,"url":"https://www.ole.com.ar/futbol-ascenso/primera-c/brancatelli-pandemia-coronavirus_0_N7paos417.html"},{"@type":"ListItem","position":6,"url":"https://www.ole.com.ar/coronavirus/vicepresidente-rentistas-uruguay-muerte_0_DpEhvs90w.html"},{"@type":"ListItem","position":7,"url":"https://www.ole.com.ar/futbol-internacional/marchi-rescate-mexico-ascenso_0_dDS0KAc4j.html"},{"@type":"ListItem","position":8,"url":"https://www.ole.com.ar/fuera-de-juego/sergio-batista-saludo-shanghai-shenhua_0_kyIpkXFgb.html"},{"@type":"ListItem","position":9,"url":"https://www.ole.com.ar/fuera-de-juego/premier-cargada-river-belgrano-twiter_0_cNw_G28Vv.html"},{"@type":"ListItem","position":10,"url":"https://www.ole.com.ar/independiente/independiente-contratos-sueldos-socios_0_qJRqYss-T.html"},{"@type":"ListItem","position":11,"url":"https://www.ole.com.ar/futbol-ascenso/-varados-_0_a9lH_jakK.html"},{"@type":"ListItem","position":12,"url":"https://www.ole.com.ar/esports/aguero-gano-fabra_0_aOM7IgvwO.html"},{"@type":"ListItem","position":13,"url":"https://www.ole.com.ar/lanus/pepo-vega-jueguitos-lanus_0_HKD4lgIZi.html"},{"@type":"ListItem","position":14,"url":"https://www.ole.com.ar/fuera-de-juego/ibrahimovic-padel-foto-centro_0_d6TA7S-_H.html"},{"@type":"ListItem","position":15,"url":"https://www.ole.com.ar/charlas-cuarentena-coronavirus/ruggeri-niembro-cuarentena_0_etQAzWEZm.html"},{"@type":"ListItem","position":16,"url":"https://www.ole.com.ar/coronavirus/mapa-interactivo-coronavirus-mundo_0_gl8elxPLv.html"},{"@type":"ListItem","position":17,"url":"https://www.ole.com.ar/boca-juniors/boca-bayern-falta-jugada-gol_0_r8aRMvEwD.html"},{"@type":"ListItem","position":18,"url":"https://www.ole.com.ar/fuera-de-juego/aguero-paulo-diaz-fabra-play-fifa_0_ZpWSGVsaN.html"},{"@type":"ListItem","position":19,"url":"https://www.ole.com.ar/fuera-de-juego/zanetti-juego-familia-coronavirus_0_VjrJTY0B5.html"},{"@type":"ListItem","position":20,"url":"https://www.ole.com.ar/river-plate/trezeguet-river-recuerdo_0_g0GCDpcjK.html"},{"@type":"ListItem","position":21,"url":"https://www.ole.com.ar/futbol-internacional/vuelve-futbol-islas-feroe_0_sDcVe2nnO.html"},{"@type":"ListItem","position":22,"url":"https://www.ole.com.ar/fuera-de-juego/borussia-dortmund-haaland-balerdi-gotze_0_LlTyWLPpR.html"},{"@type":"ListItem","position":23,"url":"https://www.ole.com.ar/defensa-y-justicia/emotiva-declaracion-crespo_0_MEn8xYvO7.html"},{"@type":"ListItem","position":24,"url":"https://www.ole.com.ar/futbol-internacional/bayern-munich-alphonso-davies_0_IC6Yr0uzK.html"},{"@type":"ListItem","position":25,"url":"https://www.ole.com.ar/river-plate/lucaspratto-historia-river_0_FCVEbySQA.html"},{"@type":"ListItem","position":26,"url":"https://www.ole.com.ar/futbol-internacional/liga-eredivisie-coronavirus-reanudacion_0_fPsYILn2H.html"},{"@type":"ListItem","position":27,"url":"https://www.ole.com.ar/tenis/kyrgios-atp-masters-madrid-virtual_0_mYcOT9oEB.html"},{"@type":"ListItem","position":28,"url":"https://www.ole.com.ar/boca-juniors/video-puerta-gol-wanchope_0_JsL4KMxM2.html"},{"@type":"ListItem","position":29,"url":"https://www.ole.com.ar/poli/pileta-banera-atleta-rusa-romashina_0_4gwYc9h06.html"},{"@type":"ListItem","position":30,"url":"https://www.ole.com.ar/boca-juniors/ander-herrera-camiseta-boca_0_FVtEeMIKc.html"},{"@type":"ListItem","position":31,"url":"https://www.ole.com.ar/futbol-primera/afa-ayuda-barbuto-clubes-plata-conmebol_0_HRpGowzcT.html"},{"@type":"ListItem","position":32,"url":"https://www.ole.com.ar/atletico-tucuman/leandro-diaz-operado-rodilla-izquierda_0_ZMXM5-vjx.html"},{"@type":"ListItem","position":33,"url":"https://www.ole.com.ar/independiente/pusineri-vivo-instagram-independiente_0_KFj81L9vl.html"},{"@type":"ListItem","position":34,"url":"https://www.ole.com.ar/boca-juniors/willy-caballero-boca-arsenal-futbol-argentino_0_OwI1DvMUw.html"},{"@type":"ListItem","position":35,"url":"https://www.ole.com.ar/seleccion/caballero-error-croacia-sampaoli-cambio_0_cDyYivebE.html"},{"@type":"ListItem","position":36,"url":"https://www.ole.com.ar/boca-juniors/boca-vasco-escritorio-roman-bianchi_0_NqyLpMbS2.html"},{"@type":"ListItem","position":37,"url":"https://www.ole.com.ar/fuera-de-juego/hanuch-platense-trasplante-operacion_0_JzXkPxgbv.html"},{"@type":"ListItem","position":38,"url":"https://www.ole.com.ar/autos/f1-decision_0_L3IJmlItK.html"},{"@type":"ListItem","position":39,"url":"https://www.ole.com.ar/racing/basile-teo-saja-arma-vestuario_0_UatPxZot4.html"},{"@type":"ListItem","position":40,"url":"https://www.ole.com.ar/futbol-internacional/inglaterra/aurier-sissoko_0_6Sdrp4ipz.html"},{"@type":"ListItem","position":41,"url":"https://www.ole.com.ar/futbol-internacional/uefa-ligas-europeas-coronavirus_0_E4-1SW3h-.html"},{"@type":"ListItem","position":42,"url":"https://www.ole.com.ar/autos/arrivabene-ferrari-f1-coronavirus_0_dnsqJtyyQ.html"},{"@type":"ListItem","position":43,"url":"https://www.ole.com.ar/informacion-general/pr_0_u4X0ayHDM.html"},{"@type":"ListItem","position":44,"url":"https://www.ole.com.ar/futbol-internacional/italia/lukaku-inter-tosia-fiebre_0_vukv2WrmU.html"},{"@type":"ListItem","position":45,"url":"https://www.ole.com.ar/futbol-ascenso/mate-dia_0_MIs7R4d-2.html"},{"@type":"ListItem","position":46,"url":"https://www.ole.com.ar/boca-juniors/boca-olaza-celta-prestamo-junio_0_GyD-vXj00.html"},{"@type":"ListItem","position":47,"url":"https://www.ole.com.ar/futbol-internacional/inglaterra/suarez-ivanovic-mordida_0_GAnqu9YY2.html"},{"@type":"ListItem","position":48,"url":"https://www.ole.com.ar/autos/trabajo-cuarentena_0_Xgnk1Ns2l.html"},{"@type":"ListItem","position":49,"url":"https://www.ole.com.ar/futbol-internacional/van-persie-van-gaal-echo-manchester_0_6k1k9KRWg.html"},{"@type":"ListItem","position":50,"url":"https://www.ole.com.ar/coronavirus/alberto-fernandez-agradece-carta-argentinos_0_8cTLGlhYB.html"},{"@type":"ListItem","position":51,"url":"https://www.ole.com.ar/futbol-internacional/america/paraguayo-subasta-coleccion-camisetas_0_rSYzg_IYX.html"},{"@type":"ListItem","position":52,"url":"https://www.ole.com.ar/river-plate/pratto-gallardo-goni-conflicto-river_0_XMwJjjkLk.html"},{"@type":"ListItem","position":53,"url":"https://www.ole.com.ar/charlas-cuarentena-coronavirus/niembro-gallardo-charlas-cuarentena-ole_0_-EpqYj92I.html"},{"@type":"ListItem","position":54,"url":"https://www.ole.com.ar/coronavirus/relevamiento-conicet-coronavirus_0_kjhANcHfc.html"},{"@type":"ListItem","position":55,"url":"https://www.ole.com.ar/velez/mauricio-pellegrino-presentacion-tecnico-velez-virtual-redes_0_SFb8SyK7A.html"},{"@type":"ListItem","position":56,"url":"https://www.ole.com.ar/coronavirus/coronavirus_0_ds5t-FZOV.html"},{"@type":"ListItem","position":57,"url":"https://www.ole.com.ar/futbol-primera/crespo-bielsa-batistuta-seleccion_0_9j_-_15Cz.html"},{"@type":"ListItem","position":58,"url":"https://www.ole.com.ar/futbol-internacional/espana/marcos-altar_0_XTkkkYQkc.html"},{"@type":"ListItem","position":59,"url":"https://www.ole.com.ar/coronavirus/eibar-coronavirus-espana-gesto-solidario_0_GZZXB00ua.html"},{"@type":"ListItem","position":60,"url":"https://www.ole.com.ar/racing/pulpo-mostaza-camiseta-anecdota_0_7OAhTwOx9.html"},{"@type":"ListItem","position":61,"url":"https://www.ole.com.ar/futbol-ascenso/atlas-ascenso-nicolas-perez-solidaridad_0_loMFa77Xq.html"},{"@type":"ListItem","position":62,"url":"https://www.ole.com.ar/boca-juniors/boca-navarromontoya-andrada-elogios_0_Yx3dWzCOS.html"},{"@type":"ListItem","position":63,"url":"https://www.ole.com.ar/futbol-internacional/italia/serie-sigue-suspendido-coronavirus_0_4vMHmLdox.html"},{"@type":"ListItem","position":64,"url":"https://www.ole.com.ar/boca-juniors/boca-diego-cagna-dt-dirigir_0_q6k5V7bkr.html"},{"@type":"ListItem","position":65,"url":"https://www.ole.com.ar/coronavirus/jujuy-primera-provincia-actividad-fisica_0_-I1FGkcfD.html"},{"@type":"ListItem","position":66,"url":"https://www.ole.com.ar/coronavirus/britanicos-torneo-coronavirus-atp-tenis_0_PPUg0rvLQ.html"},{"@type":"ListItem","position":67,"url":"https://www.ole.com.ar/futbol-internacional/gundogan-postergacion-eurocopa_0_6SK7TxNZa.html"},{"@type":"ListItem","position":68,"url":"https://www.ole.com.ar/autos/plan-austria_0_PxV08qSTZ.html"},{"@type":"ListItem","position":69,"url":"https://www.ole.com.ar/coronavirus/historia-foto-niembro-pele_0_4gHO9EzOZ.html"},{"@type":"ListItem","position":70,"url":"https://www.ole.com.ar/futbol-internacional/inglaterra/bbc_0_BXe-MqmEc.html"},{"@type":"ListItem","position":71,"url":"https://www.ole.com.ar/futbol-internacional/cristiano-ronaldo-nazario-autentico_0_nzDzLXEzJ.html"},{"@type":"ListItem","position":72,"url":"https://www.ole.com.ar/river-plate/berlocq-gallardo-tecnico-river-tenis_0_U60jezV5D.html"},{"@type":"ListItem","position":73,"url":"https://www.ole.com.ar/futbol-internacional/italia/crespo-lautaro-inter-quedarse_0_BWO4EsL2x.html"},{"@type":"ListItem","position":74,"url":"https://www.ole.com.ar/futbol-internacional/francia/pep-guardiola-francia-seleccion-nasri_0_LhZiZduS3.html"},{"@type":"ListItem","position":75,"url":"https://www.ole.com.ar/futbol-internacional/espana/barcelona-cede-derechos-estadio-camp-nou_0_1XDgpW3Qp.html"},{"@type":"ListItem","position":76,"url":"https://www.ole.com.ar/boca-juniors/iarley-descender-peor-perder-clasico_0_7fVCW2fLM.html"},{"@type":"ListItem","position":77,"url":"https://www.ole.com.ar/fuera-de-juego/granjero-ruso-brasileno-cachetadas_0_W0NJaUs5T.html"},{"@type":"ListItem","position":78,"url":"https://www.ole.com.ar/coronavirus/we-are-the-champions-queen_0_jxGrDZ6gd.html"},{"@type":"ListItem","position":79,"url":"https://www.ole.com.ar/charlas-cuarentena-coronavirus/niembro-charlas-pele-top-diego-tortuga-gallardo-trompadas_0_l_hEeQipa.html"},{"@type":"ListItem","position":80,"url":"https://www.ole.com.ar/futbol-internacional/francia/presidente-psg-esfuerzo-jugadores_0_M_alk4JTe.html"},{"@type":"ListItem","position":81,"url":"https://www.ole.com.ar/futbol-internacional/america/oro-sindicato_0_ldbc69aqp.html"},{"@type":"ListItem","position":82,"url":"https://www.ole.com.ar/futbol-internacional/tolo-gallego-salida-panama_0_OK7EXEn8F.html"},{"@type":"ListItem","position":83,"url":"https://www.ole.com.ar/boca-juniors/boca-gustado-arevalo-cavani_0_6U7_vtndq.html"},{"@type":"ListItem","position":84,"url":"https://www.ole.com.ar/futbol-internacional/italia/pescara-diseno-camiseta-dibujo-nene_0_3J_tG6OBu.html"},{"@type":"ListItem","position":85,"url":"https://www.ole.com.ar/futbol-internacional/italia/buffon-mundial-qatar-sexto-cassano_0_yfvJ1wSyg.html"},{"@type":"ListItem","position":86,"url":"https://www.ole.com.ar/futbol-internacional/espana/regreso-futbol-madrid_0_PJyPUVl6Q.html"},{"@type":"ListItem","position":87,"url":"https://www.ole.com.ar/futbol-internacional/espana/iniesta-crisis-institucional-barcelona_0_AtpYOIkvu.html"},{"@type":"ListItem","position":88,"url":"https://www.ole.com.ar/futbol-internacional/bundesliga-alemania-coronavirus_0_44Qycg4lu.html"},{"@type":"ListItem","position":89,"url":"https://www.ole.com.ar/futbol-internacional/espana/neymar-barcelona-mitad-sueldo-psg_0_XwSq7ywsP.html"},{"@type":"ListItem","position":90,"url":"https://www.ole.com.ar/futbol-internacional/america/entrenando-parque-tom-brady-patriots-tampa-bay-buccaneers-florida_0_R8Xw7uKwF.html"},{"@type":"ListItem","position":91,"url":"https://www.ole.com.ar/futbol-internacional/america/brasil-comienzo-futbol-coronavirus_0_TPvEhov66.html"},{"@type":"ListItem","position":92,"url":"https://www.ole.com.ar/coronavirus/san-fermin-oktoberfest-coronavirus_0_A7gJ0wP3u.html"},{"@type":"ListItem","position":93,"url":"https://www.ole.com.ar/futbol-internacional/espana/espana-vuelta-futbol-4-mayo_0_pgFdVX0iD.html"},{"@type":"ListItem","position":94,"url":"https://www.ole.com.ar/futbol-femenino/agustina-brian-femenino-san-carlos_0_J2B13Zc4C.html"},{"@type":"ListItem","position":95,"url":"https://www.ole.com.ar/tenis/djokovic-vacuna-coronavirus-roddick_0_9D2ORteed.html"},{"@type":"ListItem","position":96,"url":"https://www.ole.com.ar/-/angelici-poderoso-defensa_0_p317jpWIF.html"},{"@type":"ListItem","position":97,"url":"https://www.ole.com.ar/san-lorenzo/mateo-convivencia-hermano-juanfer-quintero-ilusion-fichar-san-lorenzo_0_UCs9IM8yp.html"},{"@type":"ListItem","position":98,"url":"https://www.ole.com.ar/river-plate/pelea-vestuario-error-bandera-historia-merlo-gallardo_0_xtEuZ_vo2.html"},{"@type":"ListItem","position":99,"url":"https://www.ole.com.ar/river-plate/-gallardo-mejores-tecnicos-mundo-_0_PewtzXolw.html"},{"@type":"ListItem","position":100,"url":"https://www.ole.com.ar/fuera-de-juego/imperdible-cubero-revelo-gran-cabala-russo_0_K_ZAFTZs3.html"},{"@type":"ListItem","position":101,"url":"https://www.ole.com.ar/futbol-primera/latorre-gallardo-boca-river-caia_0_uuTyoeHJg.html"},{"@type":"ListItem","position":102,"url":"https://www.ole.com.ar/racing/sebastian-beccacece-racing_0_Z3F-GKLX-.html"},{"@type":"ListItem","position":103,"url":"https://www.ole.com.ar/velez/fabian-cubero-mauro-zarate-cargo-velez_0_Ijc2GDOa8.html"},{"@type":"ListItem","position":104,"url":"https://www.ole.com.ar/tenis/murray-nadal-federer-vivo-broma_0_gYKy6uFQe.html"},{"@type":"ListItem","position":105,"url":"https://www.ole.com.ar/futbol-primera/latorre-quise-decir-puterio-cabaret_0_7nNLp6TAl.html"},{"@type":"ListItem","position":106,"url":"https://www.ole.com.ar/coronavirus/coronavirus-catamarca-formosa-covid_0_RIpzS-cC_.html"}
+    ]}
+</script>
+        <script type="text/javascript">
+    function initVideos () {
+        if ( $(".genoaPlayer").length > 0) {
+            $.each($(".genoaPlayer"), function (index, value) {
+                renderGenoaMultimedia(value);
+            });
+        }
+    }
+
+    function renderGenoaMultimedia(value) {
+        var iframe = getPlayerIframe( $(value));
+        $(value).replaceWith(iframe);
+    }
+
+    function getPlayerIframe(elm){
+        var params = {
+            url: elm.attr('data-src'),
+            playerId: elm.attr('data-player'),
+            width: elm.attr('data-width'),
+            height: elm.attr('data-height'),
+            scrolling: elm.attr('data-scrolling'),
+            frameborder: elm.attr('data-frameborder'),
+            allowfullscreen: elm.attr('data-allowfullscreen')
+        };
+
+        var genoaPvastEncoded = getGenoaPvast();
+        
+        if ($(".intVideoTpl").length > 0
+         || $(".oletevedestacada").length > 0
+         || $(".oletevesumario").length > 0) {
+            if (1 !== 1) {
+                params.width = "1000px";
+                params.height = "562px";
+            }
+        }
+
+        var iframe = $('
+            <iframe>', {
+            scrolling: params.scrolling,
+            frameborder: params.frameborder,
+            allowfullscreen: params.allowfullscreen,
+            width: params.width,
+            height: params.height,
+            src: params.url + genoaPvastEncoded
+        });
+
+        return iframe;
+    }
+
+
+    function isFacebookApp() {
+        var ua = navigator.userAgent || navigator.vendor || window.opera;
+        return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
+    }
+
+    function getAge(dateString) {
+        var age = "-2";
+        if (dateString) {
+            var today = new Date();
+            var birthDate = new Date(dateString);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+        }
+        return age;
+    }
+
+    function getGenoaPvast() {
+
+        var genoaVars = [];
+
+        /*if(localStorage.getItem('fbtoken')) {
+            genoaVars.push('fan='+localStorage.getItem('fbtoken'));
+        } else {
+            genoaVars.push('fan=-2');
+        }*/
+        if(["0","1"].includes(localStorage.getItem('fbfan'))) {
+            genoaVars.push('kw_fan='+localStorage.getItem('fbfan'));
+        } else {
+            genoaVars.push('kw_fan=-2');
+        }
+
+        /*if(typeof $('#page-data')  != 'undefined') {
+            var pageData = $('#page-data').data();
+            for (var key in pageData) {
+                if (pageData.hasOwnProperty(key)) {
+                    genoaVars.push(key + '=' + pageData[key]);
+                }
+            }
+        }
+        
+        if (isFacebookApp()) {
+            IdPase = paseE2E.idPase;
+        } else {
+            IdPase = paseE2E.getCookie("idPase");
+        }
+        if(paseE2E && typeof IdPase !== "undefined" && IdPase !== "" && IdPase !== null){
+            genoaVars.push('pase_id=' + IdPase);
+            genoaVars.push('pase_sexo=' + paseE2E.getCookie("Pase-genero"));
+            genoaVars.push('pase_edad=' + getAge(paseE2E.getCookie("Pase-fecNac")));
+        } else {
+            genoaVars.push('pase_id=-2');
+            genoaVars.push('pase_sexo=-2');
+            genoaVars.push('pase_edad=-2');
+        }*/
+
+        var genoaPvast = '';
+        for (var i = 0; i < genoaVars.length; i ++) {
+            if(i>0) {
+                genoaPvast += '&';
+            }
+            genoaPvast += genoaVars[i];
+        }
+        genoaPvastEncoded = '';
+        if(genoaPvast != '') {
+            // se comenta ya que más adelante se va a implementar de esta forma el desarrollo
+            genoaPvastEncoded = '?pvast='+encodeURIComponent('cust_params='+encodeURIComponent(genoaPvast));
+        }
+        return genoaPvastEncoded;
+    }
+
+            </script>
+            <script>let s = document.createElement("script");s.async = true;s.src ="https://www.ole.com.ar/commons/config.js?v1.19";document.head.appendChild(s);</script>
+            <script type="text/javascript">
+	var rand= "";
+	while(rand.length < 9) {
+		rand += "" + parseInt(Math.random(0) * 9);
+	}
+
+	var i = new Image(1, 1);
+	i.src = "/bbtstats/pixel.gif?category=30&entityId=1" + "&rand=" + rand; 
+
+            </script>
+            <noscript>
+                <img width="1" height="1" src="/bbtstats/pixel.gif?category=30&entityId=1&rand=952020275" />
+            </noscript>
+        </body>
+    </html>
