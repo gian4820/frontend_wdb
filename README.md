@@ -1,3 +1,2 @@
-# curso_web
-Curso en Udemy, de HTML5, CSS, BOOTSTRAP, JS, JQUERY.
-Practicando con el front end
+#WDB Coutse
+Udemy course, of HTML5, CSS, BOOTSTRAP, JS, JQUERY.
